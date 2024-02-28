@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:rentapp/Screens/home.dart';
+
 import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/pages/unoccupied.dart';
 
@@ -23,6 +25,6 @@ class MyApp extends StatelessWidget {
                 color: Color.fromARGB(255, 3, 12, 83),
                 titleTextStyle: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.bold))),
-        home: Unoccupied());
+        home: Home());
   }
 }

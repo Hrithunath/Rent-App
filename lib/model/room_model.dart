@@ -13,11 +13,14 @@ class RoomModel {
   final String bed;
   @HiveField(4)
   final String rent;
+  @HiveField(5)
+  final String image;
 
   RoomModel(
       {required this.room,
       required this.floor,
       required this.guests,
       required this.bed,
-      required this.rent});
+      required this.rent,
+      required this.image});
 }

@@ -26,7 +26,7 @@ class _AddRoomState extends State<AddRoom> {
 
   final rentController = TextEditingController();
 
-  File? imagepath;
+  String? imagepath;
 
   String? selectedImage;
 
@@ -54,9 +54,9 @@ class _AddRoomState extends State<AddRoom> {
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 237, 234, 234),
                     borderRadius: BorderRadius.circular(15),
-                    image: selectedImage != null
+                    image: imagepath != null
                         ? DecorationImage(
-                            image: FileImage(File(selectedImage!)),
+                            image: FileImage(File(imagepath!)),
                             fit: BoxFit.cover,
                           )
                         : const DecorationImage(
@@ -198,13 +198,13 @@ class _AddRoomState extends State<AddRoom> {
   }
 
   Future pickImageFromGallery() async {
-    final returnedImage =
+    final PickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    if (returnedImage == null) return;
+    if (PickedFile == null) return;
     setState(() {
-      imagepath = File(returnedImage.path);
-      selectedImage = returnedImage.path;
+      imagepath = imagepath;
+      selectedImage = PickedFile.path;
     });
   }
 
@@ -215,21 +215,28 @@ class _AddRoomState extends State<AddRoom> {
       final guests = guestsController.text.trim();
       final bed = bedController.text.trim();
       final rent = rentController.text.trim();
+      final image = imagepath;
       if (room.isEmpty ||
           floor.isEmpty ||
           guests.isEmpty ||
           bed.isEmpty ||
-          rent.isEmpty) {
+          rent.isEmpty ||
+          image == null) {
         return;
       }
 
       final rooms = RoomModel(
-          room: room, floor: floor, guests: guests, bed: bed, rent: rent);
+          room: room,
+          floor: floor,
+          guests: guests,
+          bed: bed,
+          rent: rent,
+          image: image);
 
       addRoom(rooms);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const Unoccupied()),
+        MaterialPageRoute(builder: (context) => const unoccupied()),
       );
     }
   }

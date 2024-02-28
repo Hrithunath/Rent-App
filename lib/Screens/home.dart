@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
           ),
           body: const TabBarView(
             children: [
-              Unoccupied(),
+              unoccupied(),
             ],
           ),
           bottomNavigationBar: BottomAppBar(
@@ -58,7 +58,7 @@ class Home extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => AddRoom()),
               );
             },
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
