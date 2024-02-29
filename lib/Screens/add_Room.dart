@@ -1,13 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rentapp/Screens/home.dart';
 
 import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/pages/unoccupied.dart';
 
 class AddRoom extends StatefulWidget {
-  AddRoom({super.key});
+  AddRoom({super.key, required TabController tabController});
 
   @override
   State<AddRoom> createState() => _AddRoomState();
@@ -236,7 +237,7 @@ class _AddRoomState extends State<AddRoom> {
       addRoom(rooms);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const unoccupied()),
+        MaterialPageRoute(builder: (context) => const Home()),
       );
     }
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentapp/Screens/add_Room.dart';
+import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/pages/occupied.dart';
 import 'package:rentapp/pages/paid.dart';
 import 'package:rentapp/pages/unoccupied.dart';
@@ -18,6 +19,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   void initState() {
     _tabController = TabController(length: 4, vsync: this);
     super.initState();
+    getRoom();
   }
 
   @override
@@ -72,7 +74,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AddRoom()),
+              MaterialPageRoute(
+                  builder: (context) => AddRoom(
+                        tabController: _tabController,
+                      )),
             );
           },
           child: const Icon(Icons.add),
