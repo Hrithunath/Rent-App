@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rentapp/Screens/add_Room.dart';
+import 'package:rentapp/pages/occupied.dart';
+import 'package:rentapp/pages/paid.dart';
 import 'package:rentapp/pages/unoccupied.dart';
+import 'package:rentapp/pages/unpaid.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -32,6 +35,9 @@ class Home extends StatelessWidget {
           body: const TabBarView(
             children: [
               unoccupied(),
+              occupied(),
+              paid(),
+              unpaid(),
             ],
           ),
           bottomNavigationBar: BottomAppBar(

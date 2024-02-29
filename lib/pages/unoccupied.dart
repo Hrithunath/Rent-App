@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -21,10 +20,10 @@ class unoccupied extends StatelessWidget {
               final data = roomlist[index];
               return Card(
                 child: ListTile(
-                  // leading: Image.file(
-                  //   File(data.image),
-                  //   fit: BoxFit.cover,
-                  // ),
+                  leading: Image.file(
+                    File(data.image),
+                    fit: BoxFit.cover,
+                  ),
 
                   // width: 100,
                   // height: 100,

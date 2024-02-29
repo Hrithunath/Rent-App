@@ -25,11 +25,10 @@ class _AddRoomState extends State<AddRoom> {
   final bedController = TextEditingController();
 
   final rentController = TextEditingController();
-
-  String? imagepath;
-
-  String? selectedImage;
-
+  final ImagePicker _imagePicker = ImagePicker();
+  File? pickedImage;
+  String pickedImagePath = '';
+  String imgPath = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,9 +53,9 @@ class _AddRoomState extends State<AddRoom> {
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 237, 234, 234),
                     borderRadius: BorderRadius.circular(15),
-                    image: imagepath != null
+                    image: imgPath != null
                         ? DecorationImage(
-                            image: FileImage(File(imagepath!)),
+                            image: FileImage(File(imgPath)),
                             fit: BoxFit.cover,
                           )
                         : const DecorationImage(
@@ -198,14 +197,15 @@ class _AddRoomState extends State<AddRoom> {
   }
 
   Future pickImageFromGallery() async {
-    final PickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    if (PickedFile == null) return;
-    setState(() {
-      imagepath = imagepath;
-      selectedImage = PickedFile.path;
-    });
+    final XFile? pickedFile =
+        await _imagePicker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        pickedImage = File(pickedFile.path);
+        pickedImagePath = pickedFile.path;
+        imgPath = pickedImagePath;
+      });
+    }
   }
 
   Future<void> AddRoom(BuildContext context) async {
@@ -215,13 +215,13 @@ class _AddRoomState extends State<AddRoom> {
       final guests = guestsController.text.trim();
       final bed = bedController.text.trim();
       final rent = rentController.text.trim();
-      final image = imagepath;
+      final image = imgPath;
       if (room.isEmpty ||
           floor.isEmpty ||
           guests.isEmpty ||
           bed.isEmpty ||
           rent.isEmpty ||
-          image == null) {
+          imgPath.isEmpty) {
         return;
       }
 
