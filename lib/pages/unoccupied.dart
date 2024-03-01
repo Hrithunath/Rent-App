@@ -1,13 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:rentapp/Screens/add_room.dart';
-import 'package:rentapp/Screens/edit_room.dart';
 import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
 
 class Unoccupied extends StatefulWidget {
-  const Unoccupied({Key? key}) : super(key: key);
+  const Unoccupied({super.key});
 
   @override
   State<Unoccupied> createState() => _UnoccupiedState();
@@ -44,7 +42,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                         // Room details
                         Text(
                           'Room No: ${data.room}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
@@ -53,36 +51,36 @@ class _UnoccupiedState extends State<Unoccupied> {
                           children: [
                             Text(
                               'Floor: ${data.floor}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Text(
                               'Guests: ${data.guests}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                               ),
                             ),
-                            SizedBox(width: 13),
+                            const SizedBox(width: 13),
                             Text(
                               'Bed: ${data.bed}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                               ),
                             ),
-                            SizedBox(width: 110),
+                            const SizedBox(width: 110),
                             IconButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        AddRoom(RoomModel: roomList[index]),
-                                  ),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) =>
+                                //         AddRoom(roomModel: roomList[index]),
+                                //   ),
+                                // );
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.edit,
                                 size: 18,
                               ),
@@ -95,15 +93,15 @@ class _UnoccupiedState extends State<Unoccupied> {
                           children: [
                             Text(
                               '₹: ${data.rent}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                               ),
                             ),
                             ElevatedButton.icon(
                               onPressed: () {},
-                              icon: Icon(Icons.money_outlined),
-                              label: Text('Rent'),
+                              icon: const Icon(Icons.money_outlined),
+                              label: const Text('Rent'),
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
@@ -120,7 +118,7 @@ class _UnoccupiedState extends State<Unoccupied> {
               ),
             );
           },
-          separatorBuilder: (context, index) => SizedBox(height: 10),
+          separatorBuilder: (context, index) => const SizedBox(height: 10),
           itemCount: roomList.length,
         );
       },

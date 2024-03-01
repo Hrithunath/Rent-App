@@ -1,16 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:rentapp/Screens/edit_room.dart';
 import 'package:rentapp/Screens/home.dart';
-
 import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
-import 'package:rentapp/pages/unoccupied.dart';
 
 class AddRoom extends StatefulWidget {
   final RoomModel? roomModel;
-  AddRoom({super.key, required TabController tabController, this.roomModel});
+  const AddRoom(
+      {super.key, required TabController tabController, this.roomModel});
 
   @override
   State<AddRoom> createState() => _AddRoomState();
@@ -34,6 +32,7 @@ class _AddRoomState extends State<AddRoom> {
   String imgPath = '';
   @override
   void initState() {
+    super.initState();
     if (widget.roomModel != null) {
       roomNoController.text = widget.roomModel!.room;
       floorController.text = widget.roomModel!.floor;
@@ -68,6 +67,7 @@ class _AddRoomState extends State<AddRoom> {
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 237, 234, 234),
                     borderRadius: BorderRadius.circular(15),
+                    // ignore: unnecessary_null_comparison
                     image: imgPath != null
                         ? DecorationImage(
                             image: FileImage(File(imgPath)),
