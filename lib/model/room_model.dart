@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 part 'room_model.g.dart';
 
 @HiveType(typeId: 1)
-class RoomModel {
+class RoomModel extends HiveObject {
   @HiveField(0)
   final String room;
   @HiveField(1)

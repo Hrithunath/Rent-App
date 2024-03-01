@@ -6,6 +6,7 @@ import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/pages/unoccupied.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(RoomModelAdapter().typeId)) {
     Hive.registerAdapter(RoomModelAdapter());

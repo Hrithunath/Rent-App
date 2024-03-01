@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rentapp/Screens/add_Room.dart';
+import 'package:rentapp/Screens/add_room.dart';
 import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/pages/occupied.dart';
 import 'package:rentapp/pages/paid.dart';
@@ -17,13 +17,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   @override
   void initState() {
-    _tabController = TabController(length: 4, vsync: this);
     super.initState();
+    _tabController = TabController(length: 4, vsync: this);
     getRoom();
   }
 
   @override
   Widget build(BuildContext context) {
+    getRoom();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -47,7 +48,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         body: TabBarView(
           controller: _tabController,
           children: const [
-            unoccupied(),
+            Unoccupied(),
             occupied(),
             paid(),
             unpaid(),

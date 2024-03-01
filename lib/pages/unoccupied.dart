@@ -1,45 +1,128 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:rentapp/Screens/add_room.dart';
+import 'package:rentapp/Screens/edit_room.dart';
 import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
 
-class unoccupied extends StatelessWidget {
-  const unoccupied({super.key});
+class Unoccupied extends StatefulWidget {
+  const Unoccupied({Key? key}) : super(key: key);
 
   @override
+  State<Unoccupied> createState() => _UnoccupiedState();
+}
+
+class _UnoccupiedState extends State<Unoccupied> {
+  @override
   Widget build(BuildContext context) {
-    // if(roomNotifier.isEmpty){
-
-    // }
-    return ValueListenableBuilder(
+    return ValueListenableBuilder<List<RoomModel>>(
       valueListenable: roomNotifier,
-      builder: (BuildContext, List<RoomModel> roomlist, Widget? child) {
+      builder: (BuildContext context, List<RoomModel> roomList, Widget? child) {
         return ListView.separated(
-            itemBuilder: (context, index) {
-              final data = roomlist[index];
-              return Card(
-                child: ListTile(
-                  leading: Image.file(
-                    File(data.image),
-                    fit: BoxFit.cover,
-                  ),
-
-                  // width: 100,
-                  // height: 100,
-                  // fit: BoxFit.cover,
-
-                  title: Text(data.room),
-                  subtitle: Text(data.floor),
+          itemBuilder: (context, index) {
+            final data = roomList[index];
+            return Card(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Image
+                    Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: FileImage(File(data.image)),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Room details
+                        Text(
+                          'Room No: ${data.room}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Floor: ${data.floor}',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'Guests: ${data.guests}',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                            SizedBox(width: 13),
+                            Text(
+                              'Bed: ${data.bed}',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                            SizedBox(width: 110),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AddRoom(RoomModel: roomList[index]),
+                                  ),
+                                );
+                              },
+                              icon: Icon(
+                                Icons.edit,
+                                size: 18,
+                              ),
+                              iconSize: 16,
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '₹: ${data.rent}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            ElevatedButton.icon(
+                              onPressed: () {},
+                              icon: Icon(Icons.money_outlined),
+                              label: Text('Rent'),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  const Color.fromARGB(255, 15, 227, 22),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 10,
-              );
-            },
-            itemCount: roomlist.length);
+              ),
+            );
+          },
+          separatorBuilder: (context, index) => SizedBox(height: 10),
+          itemCount: roomList.length,
+        );
       },
     );
   }

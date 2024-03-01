@@ -29,7 +29,7 @@ class RoomModelAdapter extends TypeAdapter<RoomModel> {
   @override
   void write(BinaryWriter writer, RoomModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.room)
       ..writeByte(1)
@@ -39,7 +39,9 @@ class RoomModelAdapter extends TypeAdapter<RoomModel> {
       ..writeByte(3)
       ..write(obj.bed)
       ..writeByte(4)
-      ..write(obj.rent);
+      ..write(obj.rent)
+      ..writeByte(5)
+      ..write(obj.image);
   }
 
   @override

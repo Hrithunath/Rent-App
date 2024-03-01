@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rentapp/Screens/edit_room.dart';
 import 'package:rentapp/Screens/home.dart';
 
 import 'package:rentapp/functions/db_functions.dart';
@@ -8,7 +9,8 @@ import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/pages/unoccupied.dart';
 
 class AddRoom extends StatefulWidget {
-  AddRoom({super.key, required TabController tabController});
+  final RoomModel? roomModel;
+  AddRoom({super.key, required TabController tabController, this.roomModel});
 
   @override
   State<AddRoom> createState() => _AddRoomState();
@@ -31,12 +33,24 @@ class _AddRoomState extends State<AddRoom> {
   String pickedImagePath = '';
   String imgPath = '';
   @override
+  void initState() {
+    if (widget.roomModel != null) {
+      roomNoController.text = widget.roomModel!.room;
+      floorController.text = widget.roomModel!.floor;
+      guestsController.text = widget.roomModel!.guests;
+      bedController.text = widget.roomModel!.bed;
+      rentController.text = widget.roomModel!.rent;
+      imgPath = widget.roomModel!.image;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
+        title: Center(
           child: Text(
-            'Add Room Details',
+            widget.roomModel != null ? 'Edit Room Details' : 'Add Room Details',
           ),
         ),
       ),
@@ -178,7 +192,11 @@ class _AddRoomState extends State<AddRoom> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      AddRoom(context);
+                      if (widget.roomModel != null) {
+                        editRoom(context);
+                      } else {
+                        addRoom(context);
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -209,7 +227,7 @@ class _AddRoomState extends State<AddRoom> {
     }
   }
 
-  Future<void> AddRoom(BuildContext context) async {
+  Future<void> addRoom(BuildContext context) async {
     if (formkey.currentState!.validate()) {
       final room = roomNoController.text.trim();
       final floor = floorController.text.trim();
@@ -226,7 +244,7 @@ class _AddRoomState extends State<AddRoom> {
         return;
       }
 
-      final rooms = RoomModel(
+      final addRooms = RoomModel(
           room: room,
           floor: floor,
           guests: guests,
@@ -234,11 +252,41 @@ class _AddRoomState extends State<AddRoom> {
           rent: rent,
           image: image);
 
-      addRoom(rooms);
+      await addRoomAsync(addRooms);
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const Home()),
       );
+    }
+  }
+
+  Future<void> editRoom(BuildContext context) async {
+    if (formkey.currentState!.validate()) {
+      final room = roomNoController.text.trim();
+      final floor = floorController.text.trim();
+      final guests = guestsController.text.trim();
+      final bed = bedController.text.trim();
+      final rent = rentController.text.trim();
+      final image = imgPath;
+      if (room.isEmpty ||
+          floor.isEmpty ||
+          guests.isEmpty ||
+          bed.isEmpty ||
+          rent.isEmpty ||
+          imgPath.isEmpty) {
+        return;
+      }
+
+      final updateRoom = RoomModel(
+          room: room,
+          floor: floor,
+          guests: guests,
+          bed: bed,
+          rent: rent,
+          image: image);
+
+      await updateRoomAsync(updateRoom);
+      Navigator.pop(context);
     }
   }
 }
