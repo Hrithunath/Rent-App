@@ -4,11 +4,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rentapp/Screens/home.dart';
 import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
+import 'package:rentapp/widgets/refactor_text_feild.dart';
 
 class AddRoom extends StatefulWidget {
   final RoomModel? roomModel;
+  final int? id;
   const AddRoom(
-      {super.key, required TabController tabController, this.roomModel});
+      {super.key,
+      required TabController tabController,
+      this.roomModel,
+     this.id, int? roomId});
 
   @override
   State<AddRoom> createState() => _AddRoomState();
@@ -30,6 +35,7 @@ class _AddRoomState extends State<AddRoom> {
   File? pickedImage;
   String pickedImagePath = '';
   String imgPath = '';
+
   @override
   void initState() {
     super.initState();
@@ -87,17 +93,16 @@ class _AddRoomState extends State<AddRoom> {
                         size: 50,
                       )),
                 ),
+
                 const SizedBox(
                   height: 20,
                 ),
-                TextFormField(
+
+                //=====================================Room No
+                customTextfeild(
                   controller: roomNoController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Room No',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                  ),
+                  keyboardTYpe: TextInputType.number,
+                  labelText: 'Room No',
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Room No Is Required';
@@ -107,89 +112,84 @@ class _AddRoomState extends State<AddRoom> {
                   },
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
+
                 const SizedBox(
                   height: 15,
                 ),
-                TextFormField(
-                  controller: floorController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+
+                //=====================================Floor
+                customTextfeild(
+                    controller: floorController,
+                    keyboardTYpe: TextInputType.number,
                     labelText: 'Floor',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Floor Is Required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Floor Is Required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction),
+
                 const SizedBox(
                   height: 15,
                 ),
-                TextFormField(
-                  controller: guestsController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+
+                //=====================================Guests
+                customTextfeild(
+                    controller: guestsController,
+                    keyboardTYpe: TextInputType.number,
                     labelText: 'Guests',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Guests Is Required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Guests Is Required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction),
+
                 const SizedBox(
                   height: 15,
                 ),
-                TextFormField(
-                  controller: bedController,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
+
+                //=====================================Bed
+                customTextfeild(
+                    controller: bedController,
+                    keyboardTYpe: TextInputType.name,
                     labelText: 'Bed',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Bed Is Required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Bed Is Required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction),
+
                 const SizedBox(
                   height: 15,
                 ),
-                TextFormField(
-                  controller: rentController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+
+                //=====================================Rent
+                customTextfeild(
+                    controller: rentController,
+                    keyboardTYpe: TextInputType.number,
                     labelText: 'Rent/Month',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Rent Is Required';
-                    } else {
-                      return null;
-                    }
-                  },
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Rent Is Required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction),
+
                 const SizedBox(
                   height: 15,
                 ),
+
+                //=====================================Add or Edit Button
                 ElevatedButton(
                     onPressed: () {
                       if (widget.roomModel != null) {
@@ -203,9 +203,9 @@ class _AddRoomState extends State<AddRoom> {
                         const Color.fromARGB(255, 3, 12, 83),
                       ),
                     ),
-                    child: const Text(
-                      'ADD ROOM',
-                      style: TextStyle(color: Colors.white),
+                    child: Text(
+                      widget.roomModel != null ? 'Edit Room' : 'Add Room',
+                      style: const TextStyle(color: Colors.white),
                     ))
               ],
             ),
@@ -215,6 +215,7 @@ class _AddRoomState extends State<AddRoom> {
     );
   }
 
+//=====================================PickImage
   Future pickImageFromGallery() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -227,8 +228,10 @@ class _AddRoomState extends State<AddRoom> {
     }
   }
 
+//=====================================Add Room
   Future<void> addRoom(BuildContext context) async {
     if (formkey.currentState!.validate()) {
+      
       final room = roomNoController.text.trim();
       final floor = floorController.text.trim();
       final guests = guestsController.text.trim();
@@ -262,13 +265,15 @@ class _AddRoomState extends State<AddRoom> {
 
   Future<void> editRoom(BuildContext context) async {
     if (formkey.currentState!.validate()) {
+      final id = widget.roomModel?.id;
       final room = roomNoController.text.trim();
       final floor = floorController.text.trim();
       final guests = guestsController.text.trim();
       final bed = bedController.text.trim();
       final rent = rentController.text.trim();
       final image = imgPath;
-      if (room.isEmpty ||
+      if (id == Null ||
+          room.isEmpty ||
           floor.isEmpty ||
           guests.isEmpty ||
           bed.isEmpty ||
@@ -278,6 +283,7 @@ class _AddRoomState extends State<AddRoom> {
       }
 
       final updateRoom = RoomModel(
+          id: id,
           room: room,
           floor: floor,
           guests: guests,
@@ -285,8 +291,12 @@ class _AddRoomState extends State<AddRoom> {
           rent: rent,
           image: image);
 
-      await updateRoomAsync(updateRoom);
-      Navigator.pop(context);
+      await updateRoomAsync(widget.key, updateRoom);
+      print('Room updated successfully.');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Home()),
+      );
     }
   }
 }

@@ -1,17 +1,21 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:rentapp/Screens/add_room.dart';
+import 'package:rentapp/Screens/add_userdetails.dart';
 import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
 
 class Unoccupied extends StatefulWidget {
-  const Unoccupied({super.key});
+  final TabController tabController;
+  const Unoccupied({super.key, required this.tabController});
 
   @override
   State<Unoccupied> createState() => _UnoccupiedState();
 }
 
 class _UnoccupiedState extends State<Unoccupied> {
+  int? id;
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<List<RoomModel>>(
@@ -70,21 +74,30 @@ class _UnoccupiedState extends State<Unoccupied> {
                               ),
                             ),
                             const SizedBox(width: 110),
-                            IconButton(
-                              onPressed: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) =>
-                                //         AddRoom(roomModel: roomList[index]),
-                                //   ),
-                                // );
-                              },
-                              icon: const Icon(
-                                Icons.edit,
-                                size: 18,
-                              ),
-                              iconSize: 16,
+                            Row(
+                              children: [
+                                IconButton(
+                                    onPressed: () {}, icon: Icon(Icons.delete)),
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AddRoom(
+                                         roomId: data.id,
+                                          roomModel:data,
+                                          tabController: widget.tabController,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    size: 18,
+                                  ),
+                                  iconSize: 16,
+                                ),
+                              ],
                             )
                           ],
                         ),
@@ -99,7 +112,12 @@ class _UnoccupiedState extends State<Unoccupied> {
                               ),
                             ),
                             ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AddUser()));
+                              },
                               icon: const Icon(Icons.money_outlined),
                               label: const Text('Rent'),
                               style: ButtonStyle(

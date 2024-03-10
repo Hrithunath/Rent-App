@@ -4,6 +4,8 @@ import 'package:rentapp/model/room_model.dart';
 
 ValueNotifier<List<RoomModel>> roomNotifier = ValueNotifier([]);
 
+
+//=====================================AddRoom
 Future<void> addRoomAsync(RoomModel value) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
   await roomDB.add(value);
@@ -13,13 +15,17 @@ Future<void> addRoomAsync(RoomModel value) async {
   roomNotifier.notifyListeners();
 }
 
-Future<void> updateRoomAsync(RoomModel updatedRoom) async {
+
+//=====================================UpdateRoom
+Future<void> updateRoomAsync(dynamic key, RoomModel updatedRoom) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
-  await roomDB.put(updatedRoom, updatedRoom);
+  await roomDB.put(key, updatedRoom);
   roomNotifier.value = roomDB.values.toList();
   roomNotifier.notifyListeners();
 }
 
+
+//=====================================GetRoom
 Future<void> getRoom() async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
   roomNotifier.value.clear();

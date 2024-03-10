@@ -15,6 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  int? id;
   @override
   void initState() {
     super.initState();
@@ -24,7 +25,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    getRoom();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -37,7 +37,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               controller: _tabController,
               indicatorColor: Colors.white,
               indicatorWeight: 5,
-              // isScrollable: true,
               tabs: const [
                 Tab(text: 'Unoccupied '),
                 Tab(text: 'Occupied'),
@@ -45,17 +44,21 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 Tab(text: 'Unpaid'),
               ]),
         ),
+
+        //=====================================TabBarView
         body: TabBarView(
           controller: _tabController,
-          children: const [
-            Unoccupied(),
-            occupied(),
-            paid(),
-            unpaid(),
+          children: [
+            Unoccupied(tabController: _tabController),
+            const occupied(),
+            const paid(),
+            const unpaid(),
           ],
         ),
+
+        //=====================================BottomNavigationBar
         bottomNavigationBar: BottomAppBar(
-          shape: CircularNotchedRectangle(),
+          shape: const CircularNotchedRectangle(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -71,20 +74,28 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ],
           ),
         ),
+
+        //=====================================FloatingActionButton
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => AddRoom(
-                        tabController: _tabController,
-                      )),
-            );
+            addRoom(id??0);
           },
           child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
+    );
+  }
+
+  void addRoom(int? id) {
+      // print('ID value: $id');
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => AddRoom(
+                tabController: _tabController,
+                roomId: id,
+              )),
     );
   }
 }

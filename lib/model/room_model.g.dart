@@ -17,30 +17,33 @@ class RoomModelAdapter extends TypeAdapter<RoomModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return RoomModel(
-      room: fields[0] as String,
-      floor: fields[1] as String,
-      guests: fields[2] as String,
-      bed: fields[3] as String,
-      rent: fields[4] as String,
-      image: fields[5] as String,
+      id: fields[0] as int?,
+      room: fields[1] as String,
+      floor: fields[2] as String,
+      guests: fields[3] as String,
+      bed: fields[4] as String,
+      rent: fields[5] as String,
+      image: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, RoomModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
-      ..write(obj.room)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.floor)
+      ..write(obj.room)
       ..writeByte(2)
-      ..write(obj.guests)
+      ..write(obj.floor)
       ..writeByte(3)
-      ..write(obj.bed)
+      ..write(obj.guests)
       ..writeByte(4)
-      ..write(obj.rent)
+      ..write(obj.bed)
       ..writeByte(5)
+      ..write(obj.rent)
+      ..writeByte(6)
       ..write(obj.image);
   }
 
@@ -51,6 +54,61 @@ class RoomModelAdapter extends TypeAdapter<RoomModel> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is RoomModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class UserDetailsAdapter extends TypeAdapter<UserDetails> {
+  @override
+  final int typeId = 2;
+
+  @override
+  UserDetails read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return UserDetails(
+      id: fields[0] as int?,
+      name: fields[1] as String,
+      phoneNumber: fields[2] as String,
+      uploadAdhaar: fields[3] as String,
+      checkin: fields[4] as String,
+      checkout: fields[5] as String,
+      advanceAmount: fields[6] as String,
+      image: fields[7] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, UserDetails obj) {
+    writer
+      ..writeByte(8)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.phoneNumber)
+      ..writeByte(3)
+      ..write(obj.uploadAdhaar)
+      ..writeByte(4)
+      ..write(obj.checkin)
+      ..writeByte(5)
+      ..write(obj.checkout)
+      ..writeByte(6)
+      ..write(obj.advanceAmount)
+      ..writeByte(7)
+      ..write(obj.image);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is UserDetailsAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
