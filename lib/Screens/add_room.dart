@@ -13,7 +13,8 @@ class AddRoom extends StatefulWidget {
       {super.key,
       required TabController tabController,
       this.roomModel,
-     this.id, int? roomId});
+      this.id,
+      int? roomId});
 
   @override
   State<AddRoom> createState() => _AddRoomState();
@@ -35,8 +36,6 @@ class _AddRoomState extends State<AddRoom> {
   File? pickedImage;
   String pickedImagePath = '';
   String imgPath = '';
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -182,8 +181,6 @@ class _AddRoomState extends State<AddRoom> {
                 ElevatedButton(
                     onPressed: () {
                       addRoom(context, widget.id);
-                       
-                       
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -218,7 +215,6 @@ class _AddRoomState extends State<AddRoom> {
 //=====================================Add Room
   Future<void> addRoom(BuildContext context, int? id) async {
     if (formkey.currentState!.validate()) {
-      
       final room = roomNoController.text.trim();
       final floor = floorController.text.trim();
       final guests = guestsController.text.trim();
@@ -242,15 +238,8 @@ class _AddRoomState extends State<AddRoom> {
           rent: rent,
           image: image);
 
- if (id != null) {
-        addRoomAsync(id, addRooms);
-      }
- 
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Home()),
-      );
+      addRoomAsync(addRooms);
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Home()));
     }
   }
-
 }

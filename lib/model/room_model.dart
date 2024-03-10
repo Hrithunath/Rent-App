@@ -20,13 +20,14 @@ class RoomModel extends HiveObject {
 
   RoomModel(
       {
-       this.id,
+      
       required this.room,
       required this.floor,
       required this.guests,
       required this.bed,
       required this.rent,
-      required this.image});
+      required this.image,
+       this.id});
 }
 
 

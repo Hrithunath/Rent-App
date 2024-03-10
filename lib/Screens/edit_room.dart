@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rentapp/Screens/home.dart';
+import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
@@ -12,7 +13,8 @@ class EditRoom extends StatefulWidget {
       {super.key,
       required TabController tabController,
       this.roomModel,
-     this.id, int? roomId});
+      this.id,
+      int? roomId});
 
   @override
   State<EditRoom> createState() => _EditRoomState();
@@ -54,7 +56,7 @@ class _EditRoomState extends State<EditRoom> {
       appBar: AppBar(
         title: Center(
           child: Text(
-           'Edit Room Details' ,
+            'Edit Room Details',
           ),
         ),
       ),
@@ -192,8 +194,6 @@ class _EditRoomState extends State<EditRoom> {
                 ElevatedButton(
                     onPressed: () {
                       editRoom(context, widget.id);
-                       
-                    
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -201,7 +201,7 @@ class _EditRoomState extends State<EditRoom> {
                       ),
                     ),
                     child: Text(
-                    'Save' ,
+                      'Save',
                       style: const TextStyle(color: Colors.white),
                     ))
               ],
@@ -228,7 +228,6 @@ class _EditRoomState extends State<EditRoom> {
 //=====================================Add Room
   Future<void> editRoom(BuildContext context, int? id) async {
     if (formkey.currentState!.validate()) {
-      
       final room = roomNoController.text.trim();
       final floor = floorController.text.trim();
       final guests = guestsController.text.trim();
@@ -252,13 +251,12 @@ class _EditRoomState extends State<EditRoom> {
           rent: rent,
           image: image);
 
+      
 
- 
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const Home()),
       );
     }
   }
-
 }
