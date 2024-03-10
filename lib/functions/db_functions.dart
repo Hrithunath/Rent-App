@@ -5,10 +5,11 @@ import 'package:rentapp/model/room_model.dart';
 ValueNotifier<List<RoomModel>> roomNotifier = ValueNotifier([]);
 
 //=====================================AddRoom
-Future<void> addRoomAsync( RoomModel value) async {
+Future<void> addRoomAsync(RoomModel value) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
   final newId = await roomDB.add(value);
-  // value.id = newId;
+  value.id = newId;
+  await roomDB.put(value.id, value);
   // roomNotifier.value.clear(); // Clear the list before updating
   // roomNotifier.value.addAll(roomDB.values);
   roomNotifier.notifyListeners();
