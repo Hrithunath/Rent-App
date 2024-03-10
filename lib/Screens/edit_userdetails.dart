@@ -123,7 +123,7 @@ class _EditUserState extends State<EditUser> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction),
-                      
+
                   const SizedBox(
                     height: 20,
                   ),
@@ -222,7 +222,7 @@ class _EditUserState extends State<EditUser> {
                             const Color.fromARGB(255, 3, 12, 83),
                           ),
                         ),
-                        child:  const Text(
+                        child: const Text(
                           'Save',
                           style: TextStyle(color: Colors.white),
                         ),

@@ -239,7 +239,8 @@ class _AddRoomState extends State<AddRoom> {
           image: image);
 
       addRoomAsync(addRooms);
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const Home()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const Home()));
     }
   }
 }

@@ -123,7 +123,7 @@ class _AddUserState extends State<AddUser> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction),
-                      
+
                   const SizedBox(
                     height: 20,
                   ),
@@ -222,7 +222,7 @@ class _AddUserState extends State<AddUser> {
                             const Color.fromARGB(255, 3, 12, 83),
                           ),
                         ),
-                        child:  const Text(
+                        child: const Text(
                           'Save',
                           style: TextStyle(color: Colors.white),
                         ),

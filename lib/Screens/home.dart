@@ -25,7 +25,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-   getRoom();
+    getRoom();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -96,6 +96,4 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               )),
     );
   }
-
-  
 }

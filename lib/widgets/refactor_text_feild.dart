@@ -22,9 +22,7 @@ Widget customTextfeild({
           validator: validator,
           autovalidateMode: autovalidateMode,
         ),
-        
       ),
     ],
   );
-  
 }

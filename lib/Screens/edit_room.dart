@@ -251,8 +251,6 @@ class _EditRoomState extends State<EditRoom> {
           rent: rent,
           image: image);
 
-      
-
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const Home()),
