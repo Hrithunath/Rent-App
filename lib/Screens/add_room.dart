@@ -13,7 +13,7 @@ class AddRoom extends StatefulWidget {
       {super.key,
       required TabController tabController,
       this.roomModel,
-     this.id, int? roomId});
+     this.id});
 
   @override
   State<AddRoom> createState() => _AddRoomState();
@@ -272,7 +272,7 @@ class _AddRoomState extends State<AddRoom> {
       final bed = bedController.text.trim();
       final rent = rentController.text.trim();
       final image = imgPath;
-      if (id == Null ||
+      if (widget.id == Null ||
           room.isEmpty ||
           floor.isEmpty ||
           guests.isEmpty ||
@@ -292,7 +292,7 @@ class _AddRoomState extends State<AddRoom> {
           image: image);
 
       await updateRoomAsync(widget.key, updateRoom);
-      print('Room updated successfully.');
+      // print('Room updated successfully.');
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const Home()),
