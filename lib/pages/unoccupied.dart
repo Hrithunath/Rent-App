@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:rentapp/Screens/add_room.dart';
 import 'package:rentapp/Screens/add_userdetails.dart';
+import 'package:rentapp/Screens/edit_room.dart';
 import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
 
@@ -83,8 +84,8 @@ class _UnoccupiedState extends State<Unoccupied> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => AddRoom(
-                                         roomId: data.id,
+                                        builder: (context) => EditRoom(
+                                         id: data.id,
                                           roomModel:data,
                                           tabController: widget.tabController,
                                         ),

@@ -25,6 +25,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+   getRoom();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -77,9 +78,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
         //=====================================FloatingActionButton
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            addRoom(id??0);
-          },
+          onPressed: () => addRoom(),
           child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -87,15 +86,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 
-  void addRoom(int? id) {
-      // print('ID value: $id');
+  void addRoom() {
+    // print('ID value: $id');
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => AddRoom(
                 tabController: _tabController,
-                roomId: id,
               )),
     );
   }
+
+  
 }

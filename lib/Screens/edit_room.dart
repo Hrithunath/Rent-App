@@ -2,24 +2,23 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rentapp/Screens/home.dart';
-import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
-class AddRoom extends StatefulWidget {
+class EditRoom extends StatefulWidget {
   final RoomModel? roomModel;
   final int? id;
-  const AddRoom(
+  const EditRoom(
       {super.key,
       required TabController tabController,
       this.roomModel,
      this.id, int? roomId});
 
   @override
-  State<AddRoom> createState() => _AddRoomState();
+  State<EditRoom> createState() => _EditRoomState();
 }
 
-class _AddRoomState extends State<AddRoom> {
+class _EditRoomState extends State<EditRoom> {
   final formkey = GlobalKey<FormState>();
 
   final roomNoController = TextEditingController();
@@ -36,7 +35,18 @@ class _AddRoomState extends State<AddRoom> {
   String pickedImagePath = '';
   String imgPath = '';
 
- 
+  @override
+  void initState() {
+    super.initState();
+    if (widget.id != null) {
+      roomNoController.text = widget.roomModel!.room;
+      floorController.text = widget.roomModel!.floor;
+      guestsController.text = widget.roomModel!.guests;
+      bedController.text = widget.roomModel!.bed;
+      rentController.text = widget.roomModel!.rent;
+      imgPath = widget.roomModel!.image;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +54,7 @@ class _AddRoomState extends State<AddRoom> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            widget.roomModel != null ? 'Edit Room Details' : 'Add Room Details',
+           'Edit Room Details' ,
           ),
         ),
       ),
@@ -181,9 +191,9 @@ class _AddRoomState extends State<AddRoom> {
                 //=====================================Add or Edit Button
                 ElevatedButton(
                     onPressed: () {
-                      addRoom(context, widget.id);
+                      editRoom(context, widget.id);
                        
-                       
+                    
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -191,7 +201,7 @@ class _AddRoomState extends State<AddRoom> {
                       ),
                     ),
                     child: Text(
-                      'Save',
+                    'Save' ,
                       style: const TextStyle(color: Colors.white),
                     ))
               ],
@@ -216,7 +226,7 @@ class _AddRoomState extends State<AddRoom> {
   }
 
 //=====================================Add Room
-  Future<void> addRoom(BuildContext context, int? id) async {
+  Future<void> editRoom(BuildContext context, int? id) async {
     if (formkey.currentState!.validate()) {
       
       final room = roomNoController.text.trim();
@@ -234,7 +244,7 @@ class _AddRoomState extends State<AddRoom> {
         return;
       }
 
-      final addRooms = RoomModel(
+      final editRooms = RoomModel(
           room: room,
           floor: floor,
           guests: guests,
@@ -242,9 +252,7 @@ class _AddRoomState extends State<AddRoom> {
           rent: rent,
           image: image);
 
- if (id != null) {
-        addRoomAsync(id, addRooms);
-      }
+
  
       Navigator.push(
         context,
