@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
-class AddUser extends StatefulWidget {
-  const AddUser({super.key});
+class EditUser extends StatefulWidget {
+  const EditUser({super.key});
 
   @override
-  State<AddUser> createState() => _AddUserState();
+  State<EditUser> createState() => _EditUserState();
 }
 
-class _AddUserState extends State<AddUser> {
+class _EditUserState extends State<EditUser> {
   final formkey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final phoneNumberController = TextEditingController();

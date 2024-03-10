@@ -86,7 +86,7 @@ class _AddRoomState extends State<AddRoom> {
                   height: 20,
                 ),
 
-                //=====================================Room No
+                //===================================== Room No
                 customTextfeild(
                   controller: roomNoController,
                   keyboardTYpe: TextInputType.number,
@@ -105,7 +105,7 @@ class _AddRoomState extends State<AddRoom> {
                   height: 15,
                 ),
 
-                //=====================================Floor
+                //===================================== Floor
                 customTextfeild(
                     controller: floorController,
                     keyboardTYpe: TextInputType.number,
@@ -123,7 +123,7 @@ class _AddRoomState extends State<AddRoom> {
                   height: 15,
                 ),
 
-                //=====================================Guests
+                //===================================== Guests
                 customTextfeild(
                     controller: guestsController,
                     keyboardTYpe: TextInputType.number,
@@ -141,7 +141,7 @@ class _AddRoomState extends State<AddRoom> {
                   height: 15,
                 ),
 
-                //=====================================Bed
+                //===================================== Bed
                 customTextfeild(
                     controller: bedController,
                     keyboardTYpe: TextInputType.name,
@@ -177,7 +177,7 @@ class _AddRoomState extends State<AddRoom> {
                   height: 15,
                 ),
 
-                //=====================================Add or Edit Button
+                //===================================== Add or Edit Button
                 ElevatedButton(
                     onPressed: () {
                       addRoom(context, widget.id);
@@ -187,9 +187,9 @@ class _AddRoomState extends State<AddRoom> {
                         const Color.fromARGB(255, 3, 12, 83),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Save',
-                      style: const TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white),
                     ))
               ],
             ),
@@ -199,7 +199,7 @@ class _AddRoomState extends State<AddRoom> {
     );
   }
 
-//=====================================PickImage
+//===================================== PickImage
   Future pickImageFromGallery() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -212,7 +212,7 @@ class _AddRoomState extends State<AddRoom> {
     }
   }
 
-//=====================================Add Room
+//===================================== Add Room
   Future<void> addRoom(BuildContext context, int? id) async {
     if (formkey.currentState!.validate()) {
       final room = roomNoController.text.trim();
@@ -239,7 +239,7 @@ class _AddRoomState extends State<AddRoom> {
           image: image);
 
       addRoomAsync(addRooms);
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Home()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const Home()));
     }
   }
 }
