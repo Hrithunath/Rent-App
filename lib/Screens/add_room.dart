@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rentapp/Screens/home.dart';
 import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
+import 'package:rentapp/widgets/refactor_button';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
 class AddRoom extends StatefulWidget {
@@ -177,20 +178,10 @@ class _AddRoomState extends State<AddRoom> {
                   height: 15,
                 ),
 
-                //===================================== Add or Edit Button
-                ElevatedButton(
-                    onPressed: () {
-                      addRoom(context, widget.id);
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 3, 12, 83),
-                      ),
-                    ),
-                    child: const Text(
-                      'Save',
-                      style: TextStyle(color: Colors.white),
-                    ))
+                //===================================== Add Button
+       
+                button(buttonText: 'save', buttonPressed: (){addRoom(context, widget.id);})
+                
               ],
             ),
           ),

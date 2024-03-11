@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:rentapp/Screens/add_room.dart';
 import 'package:rentapp/Screens/add_userdetails.dart';
 import 'package:rentapp/Screens/edit_room.dart';
 import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
+
+import '../widgets/refactor_Delete.dart';
+import '../widgets/refactor_edit.dart';
 
 class Unoccupied extends StatefulWidget {
   final TabController tabController;
@@ -78,19 +80,16 @@ class _UnoccupiedState extends State<Unoccupied> {
                             Row(
                               children: [
                                 IconButton(
-                                    onPressed: () {}, icon: Icon(Icons.delete)),
+                                    onPressed: () {
+                                      if(data.id !=null){
+                                            deleteAlert(context,data.id!);
+                                          }}, 
+                                          icon: Icon(Icons.delete)),
                                 IconButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => EditRoom(
-                                         id: data.id,
-                                          roomModel:data,
-                                          tabController: widget.tabController,
-                                        ),
-                                      ),
-                                    );
+                                    if(data.id !=null){
+                                            editAlert(context,data.id!,roomList,index);
+                                          }
                                   },
                                   icon: const Icon(
                                     Icons.edit,
@@ -142,5 +141,33 @@ class _UnoccupiedState extends State<Unoccupied> {
         );
       },
     );
+    
   }
+  
+  
+  editAlert(BuildContext context, int id, List<RoomModel> roomList,
+      int index) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return EditAlert(onEdit: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) =>
+                    EditRoom(roomModel: roomList[index], tabController: widget.tabController,)));
+          });
+        });
+  }
+
+  deleteAlert(BuildContext context, int id) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return DeleteAlert(onDelete: () {
+            deleteroom(id);
+            Navigator.of(context).pop();
+          });
+        });
+  }
+
 }

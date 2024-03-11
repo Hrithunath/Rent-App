@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rentapp/Screens/add_room.dart';
+
 import 'package:rentapp/functions/db_functions.dart';
+
 import 'package:rentapp/pages/occupied.dart';
 import 'package:rentapp/pages/paid.dart';
 import 'package:rentapp/pages/unoccupied.dart';
 import 'package:rentapp/pages/unpaid.dart';
+
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -46,7 +49,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ]),
         ),
 
-        //=====================================TabBarView
+        //===================================== TabBarView
         body: TabBarView(
           controller: _tabController,
           children: [
@@ -57,7 +60,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ],
         ),
 
-        //=====================================BottomNavigationBar
+        //===================================== BottomNavigationBar
         bottomNavigationBar: BottomAppBar(
           shape: const CircularNotchedRectangle(),
           child: Row(
@@ -76,7 +79,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
         ),
 
-        //=====================================FloatingActionButton
+        //===================================== FloatingActionButton
         floatingActionButton: FloatingActionButton(
           onPressed: () => addRoom(),
           child: const Icon(Icons.add),
@@ -96,4 +99,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               )),
     );
   }
+
+  
 }

@@ -215,18 +215,7 @@ class _EditUserState extends State<EditUser> {
                       const SizedBox(
                         width: 12,
                       ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromARGB(255, 3, 12, 83),
-                          ),
-                        ),
-                        child: const Text(
-                          'Save',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
+                
                     ],
                   ),
                 ],

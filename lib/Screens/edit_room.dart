@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rentapp/Screens/home.dart';
 import 'package:rentapp/functions/db_functions.dart';
 import 'package:rentapp/model/room_model.dart';
+import 'package:rentapp/widgets/refactor_button';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
 class EditRoom extends StatefulWidget {
@@ -52,6 +53,7 @@ class _EditRoomState extends State<EditRoom> {
 
   @override
   Widget build(BuildContext context) {
+    int? id = widget.roomModel!.id;
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -99,7 +101,7 @@ class _EditRoomState extends State<EditRoom> {
                   height: 20,
                 ),
 
-                //=====================================Room No
+                //===================================== Room No
                 customTextfeild(
                   controller: roomNoController,
                   keyboardTYpe: TextInputType.number,
@@ -118,7 +120,7 @@ class _EditRoomState extends State<EditRoom> {
                   height: 15,
                 ),
 
-                //=====================================Floor
+                //===================================== Floor
                 customTextfeild(
                     controller: floorController,
                     keyboardTYpe: TextInputType.number,
@@ -136,7 +138,7 @@ class _EditRoomState extends State<EditRoom> {
                   height: 15,
                 ),
 
-                //=====================================Guests
+                //===================================== Guests
                 customTextfeild(
                     controller: guestsController,
                     keyboardTYpe: TextInputType.number,
@@ -154,7 +156,7 @@ class _EditRoomState extends State<EditRoom> {
                   height: 15,
                 ),
 
-                //=====================================Bed
+                //===================================== Bed
                 customTextfeild(
                     controller: bedController,
                     keyboardTYpe: TextInputType.name,
@@ -190,20 +192,8 @@ class _EditRoomState extends State<EditRoom> {
                   height: 15,
                 ),
 
-                //=====================================Add or Edit Button
-                ElevatedButton(
-                    onPressed: () {
-                      editRoom(context, widget.id);
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 3, 12, 83),
-                      ),
-                    ),
-                    child: Text(
-                      'Save',
-                      style: const TextStyle(color: Colors.white),
-                    ))
+                
+                  button(buttonText: 'save', buttonPressed: (){editRoom(context, widget.id);})
               ],
             ),
           ),
@@ -244,17 +234,17 @@ class _EditRoomState extends State<EditRoom> {
       }
 
       final editRooms = RoomModel(
+          id: id,
           room: room,
           floor: floor,
           guests: guests,
           bed: bed,
           rent: rent,
           image: image);
+      await updateRoomAsync(editRooms,id);
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Home()),
-      );
+       Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const Home()));
     }
   }
 }
