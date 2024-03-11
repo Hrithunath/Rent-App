@@ -23,7 +23,7 @@ class EditRoom extends StatefulWidget {
 class _EditRoomState extends State<EditRoom> {
   final formkey = GlobalKey<FormState>();
 
-  final roomNoController = TextEditingController();
+  final _roomNoController = TextEditingController();
 
   final floorController = TextEditingController();
 
@@ -41,7 +41,7 @@ class _EditRoomState extends State<EditRoom> {
   void initState() {
     super.initState();
     // if (widget.id != null) {
-    roomNoController.text = widget.roomModel!.room;
+    _roomNoController.text = widget.roomModel!.room;
     floorController.text = widget.roomModel!.floor;
     guestsController.text = widget.roomModel!.guests;
     bedController.text = widget.roomModel!.bed;
@@ -103,7 +103,7 @@ class _EditRoomState extends State<EditRoom> {
 
                 //===================================== Room No
                 customTextfeild(
-                  controller: roomNoController,
+                  controller: _roomNoController,
                   keyboardTYpe: TextInputType.number,
                   labelText: 'Room No',
                   validator: (value) {
@@ -221,7 +221,7 @@ class _EditRoomState extends State<EditRoom> {
 //=====================================Add Room
   Future<void> editRoom(BuildContext context, int? id) async {
     if (formkey.currentState!.validate()) {
-      final room = roomNoController.text.trim();
+      final room = _roomNoController.text.trim();
       final floor = floorController.text.trim();
       final guests = guestsController.text.trim();
       final bed = bedController.text.trim();
