@@ -10,8 +10,7 @@ Future<void> addUserAsync(UserModel value) async {
   final userId = await userDB.add(value);
   value.id = userId;
   await userDB.put(value.id, value);
-  // roomNotifier.value.clear(); // Clear the list before updating
-  // roomNotifier.value.addAll(roomDB.values);
+ 
   userNotifier.notifyListeners();
 }
 

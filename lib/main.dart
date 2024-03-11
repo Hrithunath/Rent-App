@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:rentapp/Screens/home.dart';
 import 'package:rentapp/model/room_model.dart';
+import 'package:rentapp/model/user_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,6 +10,12 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(RoomModelAdapter().typeId)) {
     Hive.registerAdapter(RoomModelAdapter());
   }
+    if(!Hive.isAdapterRegistered(UserModelAdapter().typeId)){
+    Hive.registerAdapter(UserModelAdapter());
+  }
+
+
+  
   runApp(const MyApp());
 }
 

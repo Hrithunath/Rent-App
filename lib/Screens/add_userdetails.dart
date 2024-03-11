@@ -279,7 +279,7 @@ class _AddUserState extends State<AddUser> {
       final uploadAdhaar = uploadAdhaarController.text.trim();
       final occupation = occupationController.text.trim();
       final checkin = checkInController.text.trim();
-      final checkout = checkInController.text.trim();
+      final checkout = checkOutController.text.trim();
       final advanceAmount = advanceAmounntController.text.trim();
       final image = imgPath;
       if (name.isEmpty ||
