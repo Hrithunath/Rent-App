@@ -8,8 +8,8 @@ ValueNotifier<List<RoomModel>> roomNotifier = ValueNotifier([]);
 //=====================================AddRoom
 Future<void> addRoomAsync(RoomModel value) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
-  final newId = await roomDB.add(value);
-  value.id = newId;
+  final roomId = await roomDB.add(value);
+  value.id = roomId;
   await roomDB.put(value.id, value);
   // roomNotifier.value.clear(); // Clear the list before updating
   // roomNotifier.value.addAll(roomDB.values);

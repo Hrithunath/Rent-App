@@ -11,11 +11,7 @@ class AddRoom extends StatefulWidget {
   final RoomModel? roomModel;
   final int? id;
   const AddRoom(
-      {super.key,
-      required TabController tabController,
-      this.roomModel,
-      this.id,
-      int? roomId});
+      {super.key, required TabController tabController,this.roomModel, this.id,int? roomId});
 
   @override
   State<AddRoom> createState() => _AddRoomState();

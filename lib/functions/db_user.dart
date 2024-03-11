@@ -6,11 +6,19 @@ ValueNotifier<List<UserModel>> userNotifier = ValueNotifier([]);
 
 
 Future<void> addUserAsync(UserModel value) async {
-  final roomDB = await Hive.openBox<UserModel>('room_db');
-  final newId = await roomDB.add(value);
-  value.id = newId;
-  await roomDB.put(value.id, value);
+  final userDB = await Hive.openBox<UserModel>('user_db');
+  final userId = await userDB.add(value);
+  value.id = userId;
+  await userDB.put(value.id, value);
   // roomNotifier.value.clear(); // Clear the list before updating
   // roomNotifier.value.addAll(roomDB.values);
+  userNotifier.notifyListeners();
+}
+
+Future<void> getuser() async {
+  final userDB = await Hive.openBox<UserModel>('user_db');
+  userNotifier.value.clear();
+  userNotifier.value.addAll(userDB.values);
+
   userNotifier.notifyListeners();
 }

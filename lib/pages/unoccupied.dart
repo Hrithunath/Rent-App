@@ -76,7 +76,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                 fontSize: 15,
                               ),
                             ),
-                            const SizedBox(width: 70),
+                            const SizedBox(width: 60),
                             Row(
                               children: [
                                 IconButton(
@@ -116,7 +116,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => AddUser()));
+                                        builder: (context) => AddUser(tabController: widget.tabController,)));
                               },
                               icon: const Icon(Icons.money_outlined),
                               label: const Text('Rent'),

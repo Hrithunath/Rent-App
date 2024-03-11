@@ -11,21 +11,30 @@ import 'package:rentapp/widgets/refactor_text_feild.dart';
 class AddUser extends StatefulWidget {
   final UserModel? userModel;
   final int? id;
-  const AddUser({super.key, this.userModel, this.id, int? roomId});
+  const AddUser({super.key, this.userModel, this.id, required TabController tabController, });
 
   @override
   State<AddUser> createState() => _AddUserState();
 }
 
 class _AddUserState extends State<AddUser> {
+
   final formkey = GlobalKey<FormState>();
+  
   final nameController = TextEditingController();
+  
   final phoneNumberController = TextEditingController();
+  
   final uploadAdhaarController = TextEditingController();
+  
   final occupationController = TextEditingController();
+  
   final checkInController = TextEditingController();
+  
   final checkOutController = TextEditingController();
+  
   final advanceAmounntController = TextEditingController();
+  
   DateTime? seletedCheckInDate;
   DateTime? seletedCheckoutDate;
 
