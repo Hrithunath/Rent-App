@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rentapp/Screens/add_room.dart';
 
-import 'package:rentapp/functions/db_functions.dart';
+import 'package:rentapp/functions/db_room.dart';
 
 import 'package:rentapp/pages/occupied.dart';
 import 'package:rentapp/pages/paid.dart';

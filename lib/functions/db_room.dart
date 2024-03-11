@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:rentapp/Screens/edit_room.dart';
+
 import 'package:rentapp/model/room_model.dart';
 
 ValueNotifier<List<RoomModel>> roomNotifier = ValueNotifier([]);

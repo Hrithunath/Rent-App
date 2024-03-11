@@ -6,32 +6,33 @@ part of 'user_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserDetailsAdapter extends TypeAdapter<UserDetails> {
+class UserModelAdapter extends TypeAdapter<UserModel> {
   @override
   final int typeId = 2;
 
   @override
-  UserDetails read(BinaryReader reader) {
+  UserModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return UserDetails(
-      id: fields[0] as int?,
+    return UserModel(
       name: fields[1] as String,
       phoneNumber: fields[2] as String,
       uploadAdhaar: fields[3] as String,
-      checkin: fields[4] as String,
-      checkout: fields[5] as String,
-      advanceAmount: fields[6] as String,
-      image: fields[7] as String,
+      occupation: fields[4] as String,
+      checkin: fields[5] as String,
+      checkout: fields[6] as String,
+      advanceAmount: fields[7] as String,
+      image: fields[8] as String,
+      id: fields[0] as int?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, UserDetails obj) {
+  void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,12 +42,14 @@ class UserDetailsAdapter extends TypeAdapter<UserDetails> {
       ..writeByte(3)
       ..write(obj.uploadAdhaar)
       ..writeByte(4)
-      ..write(obj.checkin)
+      ..write(obj.occupation)
       ..writeByte(5)
-      ..write(obj.checkout)
+      ..write(obj.checkin)
       ..writeByte(6)
-      ..write(obj.advanceAmount)
+      ..write(obj.checkout)
       ..writeByte(7)
+      ..write(obj.advanceAmount)
+      ..writeByte(8)
       ..write(obj.image);
   }
 
@@ -56,7 +59,7 @@ class UserDetailsAdapter extends TypeAdapter<UserDetails> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserDetailsAdapter &&
+      other is UserModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rentapp/Screens/home.dart';
-import 'package:rentapp/functions/db_functions.dart';
+import 'package:rentapp/functions/db_room.dart';
 import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/widgets/refactor_button';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
@@ -44,7 +44,7 @@ class _AddRoomState extends State<AddRoom> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            widget.roomModel != null ? 'Edit Room Details' : 'Add Room Details',
+          'Add Room Details',
           ),
         ),
       ),
@@ -62,7 +62,7 @@ class _AddRoomState extends State<AddRoom> {
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 237, 234, 234),
                     borderRadius: BorderRadius.circular(15),
-                    // ignore: unnecessary_null_comparison
+                  
                     image: imgPath != null
                         ? DecorationImage(
                             image: FileImage(File(imgPath)),
@@ -181,7 +181,7 @@ class _AddRoomState extends State<AddRoom> {
                 //===================================== Add Button
        
                 button(buttonText: 'save', buttonPressed: (){addRoom(context, widget.id);})
-                
+
               ],
             ),
           ),
@@ -190,7 +190,7 @@ class _AddRoomState extends State<AddRoom> {
     );
   }
 
-//===================================== PickImage
+//===================================== PickImage function
   Future pickImageFromGallery() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);

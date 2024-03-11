@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:rentapp/Screens/add_userdetails.dart';
 import 'package:rentapp/Screens/edit_room.dart';
-import 'package:rentapp/functions/db_functions.dart';
+import 'package:rentapp/functions/db_room.dart';
 import 'package:rentapp/model/room_model.dart';
 
 import '../widgets/refactor_Delete.dart';
@@ -76,7 +76,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                 fontSize: 15,
                               ),
                             ),
-                            const SizedBox(width: 110),
+                            const SizedBox(width: 70),
                             Row(
                               children: [
                                 IconButton(

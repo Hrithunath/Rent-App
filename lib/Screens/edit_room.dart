@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rentapp/Screens/home.dart';
-import 'package:rentapp/functions/db_functions.dart';
+import 'package:rentapp/functions/db_room.dart';
 import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/widgets/refactor_button';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
@@ -13,9 +13,8 @@ class EditRoom extends StatefulWidget {
   const EditRoom(
       {super.key,
       required TabController tabController,
-      this.roomModel,
-      this.id,
-      int? roomId});
+      required this.roomModel,
+      this.id});
 
   @override
   State<EditRoom> createState() => _EditRoomState();
@@ -41,14 +40,15 @@ class _EditRoomState extends State<EditRoom> {
   @override
   void initState() {
     super.initState();
-    if (widget.id != null) {
-      roomNoController.text = widget.roomModel!.room;
-      floorController.text = widget.roomModel!.floor;
-      guestsController.text = widget.roomModel!.guests;
-      bedController.text = widget.roomModel!.bed;
-      rentController.text = widget.roomModel!.rent;
-      imgPath = widget.roomModel!.image;
-    }
+    // if (widget.id != null) {
+    roomNoController.text = widget.roomModel!.room;
+    floorController.text = widget.roomModel!.floor;
+    guestsController.text = widget.roomModel!.guests;
+    bedController.text = widget.roomModel!.bed;
+    rentController.text = widget.roomModel!.rent;
+    imgPath = widget.roomModel!.image;
+    print('Image Path: $imgPath');
+    // }
   }
 
   @override
@@ -192,8 +192,11 @@ class _EditRoomState extends State<EditRoom> {
                   height: 15,
                 ),
 
-                
-                  button(buttonText: 'save', buttonPressed: (){editRoom(context, widget.id);})
+                button(
+                    buttonText: 'save',
+                    buttonPressed: () {
+                      editRoom(context, widget.id);
+                    })
               ],
             ),
           ),
@@ -241,9 +244,9 @@ class _EditRoomState extends State<EditRoom> {
           bed: bed,
           rent: rent,
           image: image);
-      await updateRoomAsync(editRooms,id);
+      await updateRoomAsync(editRooms, id);
 
-       Navigator.of(context).pushReplacement(
+      Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const Home()));
     }
   }

@@ -17,13 +17,13 @@ class RoomModelAdapter extends TypeAdapter<RoomModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return RoomModel(
-      id: fields[0] as int?,
       room: fields[1] as String,
       floor: fields[2] as String,
       guests: fields[3] as String,
       bed: fields[4] as String,
       rent: fields[5] as String,
       image: fields[6] as String,
+      id: fields[0] as int?,
     );
   }
 
