@@ -10,7 +10,6 @@ Future<void> addUserAsync(UserModel value) async {
   final userId = await userDB.add(value);
   value.id = userId;
   await userDB.put(value.id, value);
- 
   userNotifier.notifyListeners();
 }
 
@@ -18,6 +17,5 @@ Future<void> getuser() async {
   final userDB = await Hive.openBox<UserModel>('user_db');
   userNotifier.value.clear();
   userNotifier.value.addAll(userDB.values);
-
-  userNotifier.notifyListeners();
+ userNotifier.notifyListeners();
 }

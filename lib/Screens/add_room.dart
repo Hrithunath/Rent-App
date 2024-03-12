@@ -12,7 +12,9 @@ class AddRoom extends StatefulWidget {
   final RoomModel? roomModel;
   
   const AddRoom(
-      {super.key, required TabController tabController,this.roomModel, int? roomId});
+      {super.key, required TabController tabController
+      ,this.roomModel
+      });
 
   @override
   State<AddRoom> createState() => _AddRoomState();
@@ -39,7 +41,7 @@ class _AddRoomState extends State<AddRoom> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text(
           'Add Room Details',
           ),

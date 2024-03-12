@@ -290,21 +290,21 @@ class _AddUserState extends State<AddUser> {
   //===================================== AddUser Function
   Future<void> addUser(BuildContext context) async {
     final name = nameController.text.trim();
-    print(name);
+ 
     final phoneNumber = phoneNumberController.text.trim();
-    print(phoneNumber);
+    
     final uploadAdhaar = uploadAdhaarController.text.trim();
-    print(uploadAdhaar);
+    
     final occupation = occupationController.text.trim();
-    print(occupation);
+    
     final checkin = checkInController.text.trim();
-    print(checkin);
+
     final checkout = checkOutController.text.trim();
-    print(checkout);
+  
     final advanceAmount = advanceAmounntController.text.trim();
-    print(advanceAmount);
+   
     final image = imgPath;
-    print(image);
+   
     if (name.isEmpty ||
         phoneNumber.isEmpty ||
         uploadAdhaar.isEmpty ||
@@ -326,7 +326,7 @@ class _AddUserState extends State<AddUser> {
         image: image);
 
     addUserAsync(addUser);
-    print(addUser);
+    print(' user $addUser');
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const User_List()));
   }
