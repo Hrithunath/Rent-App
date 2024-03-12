@@ -84,7 +84,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                       if(data.id !=null){
                                             deleteAlert(context,data.id!);
                                           }}, 
-                                          icon: Icon(Icons.delete)),
+                                          icon: const Icon(Icons.delete)),
                                 IconButton(
                                   onPressed: () {
                                     if(data.id !=null){

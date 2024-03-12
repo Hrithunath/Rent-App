@@ -1,4 +1,3 @@
-import 'package:flutter/src/foundation/change_notifier.dart';
 import 'package:hive/hive.dart';
 part 'user_model.g.dart';
 

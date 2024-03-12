@@ -5,7 +5,7 @@ import 'package:rentapp/functions/db_user.dart';
 import 'package:rentapp/model/user_model.dart';
 
 class User_List extends StatefulWidget {
-  const User_List({Key? key});
+  const User_List({super.key});
 
   @override
   State<User_List> createState() => _User_ListState();
@@ -19,6 +19,7 @@ class _User_ListState extends State<User_List> {
     getuser();
   }
 
+  @override
   Widget build(BuildContext context) {
     getuser();
     return SafeArea(
