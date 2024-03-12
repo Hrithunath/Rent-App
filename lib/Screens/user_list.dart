@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:rentapp/functions/db_user.dart';
 import 'package:rentapp/model/user_model.dart';
 
-class user_List extends StatefulWidget {
-  const user_List({Key? key});
+class User_List extends StatefulWidget {
+  const User_List({Key? key});
 
   @override
-  State<user_List> createState() => _user_ListState();
+  State<User_List> createState() => _User_ListState();
 }
 
-class _user_ListState extends State<user_List> {
+class _User_ListState extends State<User_List> {
   @override
   void initState() {
     super.initState();
@@ -56,6 +56,8 @@ class _user_ListState extends State<user_List> {
                         Text(
                           'Name: ${data.name}',
                         ),
+                        Text('phoneNumber:${data.phoneNumber}')
+                        
                       ],
                     ),
                     // subtitle: Text('Room NO 345'),

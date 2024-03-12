@@ -170,7 +170,8 @@ class _AddUserState extends State<AddUser> {
                         )),
 
                         const SizedBox(
-                          width: 12,),
+                          width: 12,
+                        ),
 
                         //===================================== CheckOut
                         Expanded(
@@ -182,7 +183,7 @@ class _AddUserState extends State<AddUser> {
                                 labeltext: 'CheckOut',
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'CheckIn is Required';
+                                    return 'CheckOut is Required';
                                   }
                                   return null;
                                 },
@@ -211,12 +212,14 @@ class _AddUserState extends State<AddUser> {
                     const SizedBox(
                       height: 20,
                     ),
-
+                    //===================================== Save Button
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        button(buttonText: 'save',
+                        button(
+                            buttonText: 'Save',
                             buttonPressed: () {
+                              print('add user');
                               addUser(context);
                             })
                       ],
@@ -230,8 +233,8 @@ class _AddUserState extends State<AddUser> {
       ),
     );
   }
-  
-    //===================================== CheckIn Function
+
+  //===================================== CheckIn Function
   Future<void> selectedCheckedIN(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -315,8 +318,9 @@ class _AddUserState extends State<AddUser> {
           image: image);
 
       addUserAsync(addUser);
+      print('saved');
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const user_List()));
+          MaterialPageRoute(builder: (context) => const User_List()));
     }
   }
 }

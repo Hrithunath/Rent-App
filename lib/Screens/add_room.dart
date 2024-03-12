@@ -60,6 +60,7 @@ class _AddRoomState extends State<AddRoom> {
                     color: const Color.fromARGB(255, 237, 234, 234),
                     borderRadius: BorderRadius.circular(15),
                   
+                    // ignore: unnecessary_null_comparison
                     image: imgPath != null
                         ? DecorationImage(
                             image: FileImage(File(imgPath)),
