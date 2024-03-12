@@ -219,8 +219,9 @@ class _AddUserState extends State<AddUser> {
                         button(
                             buttonText: 'Save',
                             buttonPressed: () {
-                              print('add user');
-                              addUser(context);
+                              if (formkey.currentState!.validate()) {
+                                addUser(context);
+                              }
                             })
                       ],
                     ),
@@ -288,39 +289,45 @@ class _AddUserState extends State<AddUser> {
 
   //===================================== AddUser Function
   Future<void> addUser(BuildContext context) async {
-    if (formkey.currentState!.validate()) {
-      final name = nameController.text.trim();
-      final phoneNumber = phoneNumberController.text.trim();
-      final uploadAdhaar = uploadAdhaarController.text.trim();
-      final occupation = occupationController.text.trim();
-      final checkin = checkInController.text.trim();
-      final checkout = checkOutController.text.trim();
-      final advanceAmount = advanceAmounntController.text.trim();
-      final image = imgPath;
-      if (name.isEmpty ||
-          phoneNumber.isEmpty ||
-          uploadAdhaar.isEmpty ||
-          occupation.isEmpty ||
-          checkin.isEmpty ||
-          checkout.isEmpty ||
-          imgPath.isEmpty) {
-        return;
-      }
-
-      final addUser = UserModel(
-          name: name,
-          phoneNumber: phoneNumber,
-          uploadAdhaar: uploadAdhaar,
-          occupation: occupation,
-          checkin: checkin,
-          checkout: checkout,
-          advanceAmount: advanceAmount,
-          image: image);
-
-      addUserAsync(addUser);
-      print('saved');
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const User_List()));
+    final name = nameController.text.trim();
+    print(name);
+    final phoneNumber = phoneNumberController.text.trim();
+    print(phoneNumber);
+    final uploadAdhaar = uploadAdhaarController.text.trim();
+    print(uploadAdhaar);
+    final occupation = occupationController.text.trim();
+    print(occupation);
+    final checkin = checkInController.text.trim();
+    print(checkin);
+    final checkout = checkOutController.text.trim();
+    print(checkout);
+    final advanceAmount = advanceAmounntController.text.trim();
+    print(advanceAmount);
+    final image = imgPath;
+    print(image);
+    if (name.isEmpty ||
+        phoneNumber.isEmpty ||
+        uploadAdhaar.isEmpty ||
+        occupation.isEmpty ||
+        checkin.isEmpty ||
+        checkout.isEmpty ||
+        imgPath.isEmpty) {
+      return;
     }
+
+    final addUser = UserModel(
+        name: name,
+        phoneNumber: phoneNumber,
+        uploadAdhaar: uploadAdhaar,
+        occupation: occupation,
+        checkin: checkin,
+        checkout: checkout,
+        advanceAmount: advanceAmount,
+        image: image);
+
+    addUserAsync(addUser);
+    print(addUser);
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const User_List()));
   }
 }
