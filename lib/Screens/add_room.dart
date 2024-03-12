@@ -7,11 +7,12 @@ import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/widgets/refactor_button';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
+
 class AddRoom extends StatefulWidget {
   final RoomModel? roomModel;
-  final int? id;
+  
   const AddRoom(
-      {super.key, required TabController tabController,this.roomModel, this.id,int? roomId});
+      {super.key, required TabController tabController,this.roomModel, int? roomId});
 
   @override
   State<AddRoom> createState() => _AddRoomState();
@@ -176,7 +177,8 @@ class _AddRoomState extends State<AddRoom> {
 
                 //===================================== Add Button
        
-                button(buttonText: 'save', buttonPressed: (){addRoom(context, widget.id);})
+                button(buttonText: 'save', buttonPressed: (){addRoom(context);
+                })
 
               ],
             ),
@@ -199,8 +201,8 @@ class _AddRoomState extends State<AddRoom> {
     }
   }
 
-//===================================== Add Room
-  Future<void> addRoom(BuildContext context, int? id) async {
+//===================================== AddRoom Function
+  Future<void> addRoom(BuildContext context) async {
     if (formkey.currentState!.validate()) {
       final room = roomNoController.text.trim();
       final floor = floorController.text.trim();

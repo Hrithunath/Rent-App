@@ -154,7 +154,7 @@ class _UnoccupiedState extends State<Unoccupied> {
             Navigator.of(context).pop();
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) =>
-                    EditRoom(roomModel: roomList[index], tabController: widget.tabController,)));
+                    EditRoom(roomModel: roomList[index])));
           });
         });
   }

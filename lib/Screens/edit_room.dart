@@ -9,12 +9,12 @@ import 'package:rentapp/widgets/refactor_text_feild.dart';
 
 class EditRoom extends StatefulWidget {
   final RoomModel? roomModel;
-  final int? id;
+  
   const EditRoom(
       {super.key,
-      required TabController tabController,
+     
       required this.roomModel,
-      this.id});
+     });
 
   @override
   State<EditRoom> createState() => _EditRoomState();
@@ -195,7 +195,7 @@ class _EditRoomState extends State<EditRoom> {
                 button(
                     buttonText: 'save',
                     buttonPressed: () {
-                      editRoom(context, widget.id);
+                      editRoom(context,id);
                     })
               ],
             ),

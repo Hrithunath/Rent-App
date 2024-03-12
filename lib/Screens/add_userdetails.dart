@@ -6,35 +6,38 @@ import 'package:rentapp/Screens/user_list.dart';
 import 'package:rentapp/functions/db_user.dart';
 import 'package:rentapp/model/user_model.dart';
 import 'package:rentapp/widgets/refactor_button';
+import 'package:rentapp/widgets/refactor_calender.dart';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
 class AddUser extends StatefulWidget {
   final UserModel? userModel;
-  final int? id;
-  const AddUser({super.key, this.userModel, this.id, required TabController tabController, });
+  const AddUser({
+    super.key,
+    this.userModel,
+    required TabController tabController,
+  });
 
   @override
   State<AddUser> createState() => _AddUserState();
 }
 
 class _AddUserState extends State<AddUser> {
-
   final formkey = GlobalKey<FormState>();
-  
+
   final nameController = TextEditingController();
-  
+
   final phoneNumberController = TextEditingController();
-  
+
   final uploadAdhaarController = TextEditingController();
-  
+
   final occupationController = TextEditingController();
-  
+
   final checkInController = TextEditingController();
-  
+
   final checkOutController = TextEditingController();
-  
+
   final advanceAmounntController = TextEditingController();
-  
+
   DateTime? seletedCheckInDate;
   DateTime? seletedCheckoutDate;
 
@@ -75,7 +78,7 @@ class _AddUserState extends State<AddUser> {
                         radius: 70,
                         backgroundImage: pickedImage != null
                             ? FileImage(pickedImage!)
-                            : AssetImage("assets/images/profile.jpg")
+                            : const AssetImage("assets/images/profile.jpg")
                                 as ImageProvider,
                       ),
                     ),
@@ -146,41 +149,45 @@ class _AddUserState extends State<AddUser> {
                     const SizedBox(
                       height: 20,
                     ),
+
+                    //===================================== CheckIn
                     Row(
                       children: [
                         Expanded(
-                          child: TextFormField(
-                            onTap: () {
-                              selectedCheckedIN(context);
-                            },
-                            controller: checkInController,
-                            readOnly: true,
-                            decoration: InputDecoration(
-                              labelText: 'Check in',
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              suffixIcon: const Icon(Icons.calendar_today),
-                            ),
-                          ),
-                        ),
+                            child: customtextFeildcalender(
+                          controller: checkInController,
+                          onTapcalender: () {
+                            selectedCheckedIN(context);
+                          },
+                          labeltext: 'Check In',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'CheckIn is Required';
+                            }
+                            return null;
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        )),
+
                         const SizedBox(
-                          width: 12,
-                        ),
+                          width: 12,),
+
+                        //===================================== CheckOut
                         Expanded(
-                          child: TextFormField(
-                            onTap: () {
-                              selectedCheckedOut(context);
-                            },
-                            controller: checkOutController,
-                            readOnly: true,
-                            decoration: InputDecoration(
-                              labelText: 'Check out',
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              suffixIcon: const Icon(Icons.calendar_today),
-                            ),
-                          ),
-                        ),
+                            child: customtextFeildcalender(
+                                controller: checkOutController,
+                                onTapcalender: () {
+                                  selectedCheckedOut(context);
+                                },
+                                labeltext: 'CheckOut',
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'CheckIn is Required';
+                                  }
+                                  return null;
+                                },
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction)),
                       ],
                     ),
 
@@ -208,7 +215,10 @@ class _AddUserState extends State<AddUser> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        button(buttonText: 'save',buttonPressed: () {addUser(context, widget.id);})
+                        button(buttonText: 'save',
+                            buttonPressed: () {
+                              addUser(context);
+                            })
                       ],
                     ),
                   ],
@@ -220,7 +230,8 @@ class _AddUserState extends State<AddUser> {
       ),
     );
   }
-
+  
+    //===================================== CheckIn Function
   Future<void> selectedCheckedIN(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -237,6 +248,7 @@ class _AddUserState extends State<AddUser> {
       print('No data range selected');
     }
   }
+  //===================================== CheckOut Function
 
   Future<void> selectedCheckedOut(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -259,7 +271,7 @@ class _AddUserState extends State<AddUser> {
     }
   }
 
-  //===================================== PickImage function
+  //===================================== PickImage Function
   Future<void> pickImage() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -271,8 +283,8 @@ class _AddUserState extends State<AddUser> {
     }
   }
 
-  //===================================== Add user
-  Future<void> addUser(BuildContext context, int? id) async {
+  //===================================== AddUser Function
+  Future<void> addUser(BuildContext context) async {
     if (formkey.currentState!.validate()) {
       final name = nameController.text.trim();
       final phoneNumber = phoneNumberController.text.trim();
