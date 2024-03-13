@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class occupied extends StatelessWidget {
-  const occupied({super.key});
+class Occupied extends StatelessWidget {
+  const Occupied({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }

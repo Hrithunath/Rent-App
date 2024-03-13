@@ -235,9 +235,7 @@ class _EditUserState extends State<EditUser> {
         seletedCheckInDate = pickedDate;
         checkInController.text = DateFormat.yMd().format(pickedDate);
       });
-    } else {
-      print('No data range selected');
-    }
+    } 
   }
 
   Future<void> selectedCheckedOut(BuildContext context) async {

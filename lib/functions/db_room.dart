@@ -17,9 +17,9 @@ Future<void> addRoomAsync(RoomModel value) async {
 }
 
 //=====================================UpdateRoom
-Future<void> updateRoomAsync(EditRoom, id) async {
+Future<void> updateRoomAsync(editRoom, id) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
-  await roomDB.put(EditRoom.id, EditRoom);
+  await roomDB.put(editRoom.id, editRoom);
   // roomNotifier.value.clear(); // Clear the list before updating
   // roomNotifier.value.addAll(roomDB.values);
   // roomNotifier.notifyListeners();

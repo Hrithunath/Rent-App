@@ -6,7 +6,7 @@ import 'package:rentapp/Screens/edit_room.dart';
 import 'package:rentapp/functions/db_room.dart';
 import 'package:rentapp/model/room_model.dart';
 
-import '../widgets/refactor_Delete.dart';
+import '../widgets/refactor_delete.dart';
 import '../widgets/refactor_edit.dart';
 
 class Unoccupied extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:rentapp/Screens/user_list.dart';
+import 'package:rentapp/Screens/User_list.dart';
 import 'package:rentapp/functions/db_user.dart';
 import 'package:rentapp/model/user_model.dart';
 import 'package:rentapp/widgets/refactor_button';
@@ -248,9 +248,7 @@ class _AddUserState extends State<AddUser> {
         seletedCheckInDate = pickedDate;
         checkInController.text = DateFormat.yMd().format(pickedDate);
       });
-    } else {
-      print('No data range selected');
-    }
+    } 
   }
   //===================================== CheckOut Function
 
@@ -311,7 +309,7 @@ class _AddUserState extends State<AddUser> {
         occupation.isEmpty ||
         checkin.isEmpty ||
         checkout.isEmpty ||
-        imgPath.isEmpty) {
+        image.isEmpty) {
       return;
     }
 

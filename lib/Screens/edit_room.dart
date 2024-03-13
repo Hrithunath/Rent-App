@@ -23,7 +23,7 @@ class EditRoom extends StatefulWidget {
 class _EditRoomState extends State<EditRoom> {
   final formkey = GlobalKey<FormState>();
 
-  final _roomNoController = TextEditingController();
+  final roomNoController = TextEditingController();
 
   final floorController = TextEditingController();
 
@@ -40,14 +40,14 @@ class _EditRoomState extends State<EditRoom> {
   @override
   void initState() {
     super.initState();
-    // if (widget.id != null) {
-    _roomNoController.text = widget.roomModel!.room;
+    
+    roomNoController.text = widget.roomModel!.room;
     floorController.text = widget.roomModel!.floor;
     guestsController.text = widget.roomModel!.guests;
     bedController.text = widget.roomModel!.bed;
     rentController.text = widget.roomModel!.rent;
     imgPath = widget.roomModel!.image;
-    print('Image Path: $imgPath');
+   
     // }
   }
 
@@ -56,7 +56,7 @@ class _EditRoomState extends State<EditRoom> {
     int? id = widget.roomModel!.id;
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text(
             'Edit Room Details',
           ),
@@ -103,7 +103,7 @@ class _EditRoomState extends State<EditRoom> {
 
                 //===================================== Room No
                 customTextfeild(
-                  controller: _roomNoController,
+                  controller: roomNoController,
                   keyboardTYpe: TextInputType.number,
                   labelText: 'Room No',
                   validator: (value) {
@@ -221,7 +221,7 @@ class _EditRoomState extends State<EditRoom> {
 //=====================================Add Room
   Future<void> editRoom(BuildContext context, int? id) async {
     if (formkey.currentState!.validate()) {
-      final room = _roomNoController.text.trim();
+      final room = roomNoController.text.trim();
       final floor = floorController.text.trim();
       final guests = guestsController.text.trim();
       final bed = bedController.text.trim();

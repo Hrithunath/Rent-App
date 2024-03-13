@@ -54,9 +54,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           controller: _tabController,
           children: [
             Unoccupied(tabController: _tabController),
-            const occupied(),
-            const paid(),
-            const unpaid(),
+            const Occupied(),
+            const Paid(),
+            const Unpaid(),
           ],
         ),
 

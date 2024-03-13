@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rentapp/Screens/home.dart';
 import 'package:rentapp/functions/db_room.dart';
@@ -229,6 +230,35 @@ class _AddRoomState extends State<AddRoom> {
           bed: bed,
           rent: rent,
           image: image);
+
+Future<void> checkExistingRoom(String room) async {
+  final roomDB = await Hive.openBox<RoomModel>('room_db');
+  
+  // Check if any room matches the provided room number
+  bool roomExists = roomDB.values.any((element) => element.room == room);
+  
+  // If room exists, show AlertDialog
+  if (roomExists) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Room No Already Exists'),
+          content: Text('The room number $room already exists. Please enter a different room number.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 
       addRoomAsync(addRooms);
       Navigator.of(context).pushReplacement(
