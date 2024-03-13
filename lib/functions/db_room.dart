@@ -34,6 +34,16 @@ Future<void> getRoom() async {
   roomNotifier.notifyListeners();
 }
 
+bool ischeckroomNo(int roomId) {
+  for (final room in roomNotifier.value) {
+    if (room.id == roomId) {
+      return true;
+    }
+  }
+  return false;
+}
+
+//=====================================GetRoom
 Future<void> deleteroom(int id) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
   await roomDB.delete(id);

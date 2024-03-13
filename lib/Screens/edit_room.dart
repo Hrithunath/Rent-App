@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rentapp/Screens/home.dart';
 import 'package:rentapp/functions/db_room.dart';
 import 'package:rentapp/model/room_model.dart';
-import 'package:rentapp/widgets/refactor_button';
+import 'package:rentapp/widgets/refactor_button.dart';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
 class EditRoom extends StatefulWidget {
@@ -246,6 +246,7 @@ class _EditRoomState extends State<EditRoom> {
           image: image);
       await updateRoomAsync(editRooms, id);
 
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const Home()));
     }

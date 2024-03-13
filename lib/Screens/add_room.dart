@@ -1,21 +1,17 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rentapp/Screens/home.dart';
 import 'package:rentapp/functions/db_room.dart';
 import 'package:rentapp/model/room_model.dart';
-import 'package:rentapp/widgets/refactor_button';
+import 'package:rentapp/widgets/refactor_button.dart';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
-
 
 class AddRoom extends StatefulWidget {
   final RoomModel? roomModel;
-  
+
   const AddRoom(
-      {super.key, required TabController tabController
-      ,this.roomModel
-      });
+      {super.key, required TabController tabController, this.roomModel});
 
   @override
   State<AddRoom> createState() => _AddRoomState();
@@ -44,7 +40,7 @@ class _AddRoomState extends State<AddRoom> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-          'Add Room Details',
+            'Add Room Details',
           ),
         ),
       ),
@@ -62,7 +58,7 @@ class _AddRoomState extends State<AddRoom> {
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 237, 234, 234),
                     borderRadius: BorderRadius.circular(15),
-                  
+
                     // ignore: unnecessary_null_comparison
                     image: imgPath != null
                         ? DecorationImage(
@@ -180,10 +176,27 @@ class _AddRoomState extends State<AddRoom> {
                 ),
 
                 //===================================== Add Button
-       
-                button(buttonText: 'save', buttonPressed: (){addRoom(context);
-                })
 
+                button(
+                    buttonText: 'save',
+                    buttonPressed: () {
+                       final data = widget.roomModel;
+                      if (data != null && ischeckroomNo(data.id!)) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.red,
+                            margin: EdgeInsets.all(10),
+                            content: Text(
+                              'Item Already added',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        );
+                      } else {
+                        addRoom(context);
+                      }
+                    })
               ],
             ),
           ),
@@ -230,35 +243,6 @@ class _AddRoomState extends State<AddRoom> {
           bed: bed,
           rent: rent,
           image: image);
-
-Future<void> checkExistingRoom(String room) async {
-  final roomDB = await Hive.openBox<RoomModel>('room_db');
-  
-  // Check if any room matches the provided room number
-  bool roomExists = roomDB.values.any((element) => element.room == room);
-  
-  // If room exists, show AlertDialog
-  if (roomExists) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Room No Already Exists'),
-          content: Text('The room number $room already exists. Please enter a different room number.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
 
       addRoomAsync(addRooms);
       Navigator.of(context).pushReplacement(
