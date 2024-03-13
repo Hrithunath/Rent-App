@@ -34,9 +34,9 @@ Future<void> getRoom() async {
   roomNotifier.notifyListeners();
 }
 
-bool ischeckroomNo(int roomId) {
+bool ischeckroomNo(String roomId) {
   for (final room in roomNotifier.value) {
-    if (room.id == roomId) {
+    if (room.room == roomId) {
       return true;
     }
   }

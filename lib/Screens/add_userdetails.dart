@@ -175,20 +175,27 @@ class _AddUserState extends State<AddUser> {
 
                         //===================================== CheckOut
                         Expanded(
-                            child: customtextFeildcalender(
-                                controller: checkOutController,
-                                onTapcalender: () {
-                                  selectedCheckedOut(context);
-                                },
-                                labeltext: 'CheckOut',
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'CheckOut is Required';
-                                  }
-                                  return null;
-                                },
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction)),
+                            child:
+                                //  customtextFeildcalender(
+                                //     controller: checkOutController,
+                                //     onTapcalender: () {
+                                //       selectedCheckedOut(context);
+                                //     },
+                                //     labeltext: 'CheckOut',
+                                //     validator: (value) {
+                                //       if (value == null || value.isEmpty) {
+                                //         return 'CheckOut is Required';
+                                //       }
+                                //       return null;
+                                //     },
+                                //     autovalidateMode:
+                                //         AutovalidateMode.onUserInteraction)
+                                TextFormField(
+                          controller: checkInController,
+                          onTap: () {
+                            seletedCheckoutDate;
+                          },
+                        )),
                       ],
                     ),
 
@@ -248,7 +255,7 @@ class _AddUserState extends State<AddUser> {
         seletedCheckInDate = pickedDate;
         checkInController.text = DateFormat.yMd().format(pickedDate);
       });
-    } 
+    }
   }
   //===================================== CheckOut Function
 
@@ -267,8 +274,8 @@ class _AddUserState extends State<AddUser> {
       });
     } else {
       setState(() {
-        seletedCheckoutDate = DateTime.now();
-        checkOutController.text = DateFormat.yMd().format(DateTime.now());
+        seletedCheckoutDate = null;
+        checkOutController.text = "Indefinite";
       });
     }
   }
@@ -280,7 +287,7 @@ class _AddUserState extends State<AddUser> {
     if (pickedFile != null) {
       setState(() {
         pickedImage = File(pickedFile.path);
-        pickedImagePath = pickedFile.path;
+        imgPath = pickedFile.path;
       });
     }
   }
@@ -288,21 +295,21 @@ class _AddUserState extends State<AddUser> {
   //===================================== AddUser Function
   Future<void> addUser(BuildContext context) async {
     final name = nameController.text.trim();
- 
+
     final phoneNumber = phoneNumberController.text.trim();
-    
+
     final uploadAdhaar = uploadAdhaarController.text.trim();
-    
+
     final occupation = occupationController.text.trim();
-    
+
     final checkin = checkInController.text.trim();
 
     final checkout = checkOutController.text.trim();
-  
+
     final advanceAmount = advanceAmounntController.text.trim();
-   
+
     final image = imgPath;
-   
+    print('$image');
     if (name.isEmpty ||
         phoneNumber.isEmpty ||
         uploadAdhaar.isEmpty ||
@@ -323,7 +330,7 @@ class _AddUserState extends State<AddUser> {
         advanceAmount: advanceAmount,
         image: image);
 
-    addUserAsync(addUser);
+    await addUserAsync(addUser);
     print(' user $addUser');
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const User_List()));

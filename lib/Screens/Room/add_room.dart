@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:rentapp/Screens/home.dart';
+import 'package:rentapp/Screens/Room/home.dart';
 import 'package:rentapp/functions/db_room.dart';
 import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/widgets/refactor_button.dart';
@@ -30,8 +30,8 @@ class _AddRoomState extends State<AddRoom> {
 
   final rentController = TextEditingController();
   final ImagePicker _imagePicker = ImagePicker();
-  File? pickedImage;
-  String pickedImagePath = '';
+  // File? pickedImage;
+  // String pickedImagePath = '';
   String imgPath = '';
 
   @override
@@ -179,9 +179,11 @@ class _AddRoomState extends State<AddRoom> {
 
                 button(
                     buttonText: 'save',
-                    buttonPressed: () {
-                       final data = widget.roomModel;
-                      if (data != null && ischeckroomNo(data.id!)) {
+                    buttonPressed: ()async {
+                      // final data = widget.roomModel;
+                      if (
+                        // data != null &&
+                        ischeckroomNo(roomNoController.text)) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             behavior: SnackBarBehavior.floating,
@@ -211,9 +213,9 @@ class _AddRoomState extends State<AddRoom> {
         await _imagePicker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
-        pickedImage = File(pickedFile.path);
-        pickedImagePath = pickedFile.path;
-        imgPath = pickedImagePath;
+        // pickedImage = File(pickedFile.path);
+        // pickedImagePath = pickedFile.path;
+        imgPath = pickedFile.path;
       });
     }
   }
@@ -243,7 +245,7 @@ class _AddRoomState extends State<AddRoom> {
           bed: bed,
           rent: rent,
           image: image);
-
+      print('room1');
       addRoomAsync(addRooms);
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const Home()));
