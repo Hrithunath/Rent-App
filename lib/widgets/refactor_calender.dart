@@ -8,7 +8,7 @@ Widget customtextFeildcalender(
      required AutovalidateMode autovalidateMode,
     }) {
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.only(right: 20,left: 20),
     child: TextFormField(
       readOnly: true,
       controller: controller,

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:rentapp/Screens/user/user_details.dart';
 import 'package:rentapp/functions/db_user.dart';
 import 'package:rentapp/model/user_model.dart';
 
@@ -26,7 +27,7 @@ class _User_ListState extends State<User_List> {
             'User Details',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Colors.blue,
+          
           centerTitle: true,
         ),
         body: Padding(
@@ -40,6 +41,8 @@ class _User_ListState extends State<User_List> {
 
                   return Card(
                     child: ListTile(
+                      onTap: (){Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) =>  UserDetails(userModel: data)));},
                       leading: CircleAvatar(
                         backgroundImage: FileImage(File(data.image)),
                         radius: 35,

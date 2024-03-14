@@ -97,9 +97,9 @@ class _EditRoomState extends State<EditRoom> {
                       )),
                 ),
 
-                const SizedBox(
-                  height: 20,
-                ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
 
                 //===================================== Room No
                 customTextfeild(
@@ -116,9 +116,9 @@ class _EditRoomState extends State<EditRoom> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
 
-                const SizedBox(
-                  height: 15,
-                ),
+                // const SizedBox(
+                //   height: 15,
+                // ),
 
                 //===================================== Floor
                 customTextfeild(
@@ -134,9 +134,9 @@ class _EditRoomState extends State<EditRoom> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                const SizedBox(
-                  height: 15,
-                ),
+                // const SizedBox(
+                //   height: 15,
+                // ),
 
                 //===================================== Guests
                 customTextfeild(
@@ -152,9 +152,9 @@ class _EditRoomState extends State<EditRoom> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                const SizedBox(
-                  height: 15,
-                ),
+                // const SizedBox(
+                //   height: 15,
+                // ),
 
                 //===================================== Bed
                 customTextfeild(
@@ -170,9 +170,9 @@ class _EditRoomState extends State<EditRoom> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                const SizedBox(
-                  height: 15,
-                ),
+                // const SizedBox(
+                //   height: 15,
+                // ),
 
                 //===================================== Rent
                 customTextfeild(
@@ -188,9 +188,9 @@ class _EditRoomState extends State<EditRoom> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                const SizedBox(
-                  height: 15,
-                ),
+                // const SizedBox(
+                //   height: 15,
+                // ),
 
                 button(
                     buttonText: 'save',

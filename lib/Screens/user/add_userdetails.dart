@@ -58,16 +58,13 @@ class _AddUserState extends State<AddUser> {
         ),
         backgroundColor: Colors.blue,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 5,
-          vertical: 7,
-        ),
-        child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              child: Form(
-                key: formkey,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Form(
+              key: formkey,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,9 +79,9 @@ class _AddUserState extends State<AddUser> {
                                 as ImageProvider,
                       ),
                     ),
-                    const SizedBox(
-                      height:10,
-                    ),
+                    // const SizedBox(
+                    //   height:10,
+                    // ),
                     //===================================== Name
                     customTextfeild(
                       controller: nameController,
@@ -122,17 +119,31 @@ class _AddUserState extends State<AddUser> {
                     //   height:10,
                     // ),
                     //===================================== Upload Adhaar
-                    customTextfeild(
-                      controller: uploadAdhaarController,
-                      keyboardTYpe: TextInputType.text,
-                      labelText: 'Upload Adhaar',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Upload Adhaar is Required';
-                        }
-                        return null;
-                      },
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: TextFormField(
+                        controller: uploadAdhaarController,
+                        keyboardType: TextInputType.none,
+                        decoration: InputDecoration(
+                          labelText: 'Upload Adhaar',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              pickImage();
+                            },
+                            child: Icon(Icons.upload_file),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Upload Adhaar is Required';
+                          }
+                          return null;
+                        },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      ),
                     ),
                     // const SizedBox(
                     //   height:10,
@@ -194,18 +205,22 @@ class _AddUserState extends State<AddUser> {
                                 //     },
                                 //     autovalidateMode:
                                 //         AutovalidateMode.onUserInteraction)
-                                TextFormField(
-                          controller: checkOutController,
-                          onTap: () {
-                            selectedCheckedOut(context);
-                          },
-                          decoration: InputDecoration(
-                            labelText: 'Check Out',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            suffixIcon: GestureDetector(
-                              child: Icon(Icons.calendar_month),
+                                Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: TextFormField(
+                            controller: checkOutController,
+                            keyboardType: TextInputType.none,
+                            onTap: () {
+                              selectedCheckedOut(context);
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'Check Out',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              suffixIcon: GestureDetector(
+                                child: Icon(Icons.calendar_month),
+                              ),
                             ),
                           ),
                         )),
@@ -301,6 +316,7 @@ class _AddUserState extends State<AddUser> {
       setState(() {
         pickedImage = File(pickedFile.path);
         imgPath = pickedFile.path;
+        
       });
     }
   }
