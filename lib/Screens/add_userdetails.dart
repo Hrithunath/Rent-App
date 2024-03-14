@@ -60,8 +60,8 @@ class _AddUserState extends State<AddUser> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 10,
+          horizontal: 5,
+          vertical: 7,
         ),
         child: SafeArea(
           child: Center(
@@ -83,7 +83,7 @@ class _AddUserState extends State<AddUser> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height:10,
                     ),
                     //===================================== Name
                     customTextfeild(
@@ -98,9 +98,9 @@ class _AddUserState extends State<AddUser> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // const SizedBox(
+                    //   height:1,
+                    // ),
                     //===================================== Phone Number
                     customTextfeild(
                       controller: phoneNumberController,
@@ -109,14 +109,18 @@ class _AddUserState extends State<AddUser> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Phone Number is Required';
+                        } else if (!RegExp(r"^(?:\+91)?[0-9]{10}$")
+                            .hasMatch(value)) {
+                          return 'Enter Valid Mobile number';
+                        } else {
+                          return null;
                         }
-                        return null;
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // const SizedBox(
+                    //   height:10,
+                    // ),
                     //===================================== Upload Adhaar
                     customTextfeild(
                       controller: uploadAdhaarController,
@@ -130,9 +134,9 @@ class _AddUserState extends State<AddUser> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // const SizedBox(
+                    //   height:10,
+                    // ),
                     //===================================== Occupation
                     customTextfeild(
                       controller: occupationController,
@@ -146,9 +150,9 @@ class _AddUserState extends State<AddUser> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
 
                     //===================================== CheckIn
                     Row(
@@ -169,9 +173,9 @@ class _AddUserState extends State<AddUser> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                         )),
 
-                        const SizedBox(
-                          width: 12,
-                        ),
+                        // const SizedBox(
+                        //   width: 12,
+                        // ),
 
                         //===================================== CheckOut
                         Expanded(
@@ -191,17 +195,26 @@ class _AddUserState extends State<AddUser> {
                                 //     autovalidateMode:
                                 //         AutovalidateMode.onUserInteraction)
                                 TextFormField(
-                          controller: checkInController,
+                          controller: checkOutController,
                           onTap: () {
-                            seletedCheckoutDate;
+                            selectedCheckedOut(context);
                           },
+                          decoration: InputDecoration(
+                            labelText: 'Check Out',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            suffixIcon: GestureDetector(
+                              child: Icon(Icons.calendar_month),
+                            ),
+                          ),
                         )),
                       ],
                     ),
 
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
 
                     //===================================== Advance Amount
                     customTextfeild(
@@ -216,9 +229,9 @@ class _AddUserState extends State<AddUser> {
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
                     //===================================== Save Button
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -295,19 +308,12 @@ class _AddUserState extends State<AddUser> {
   //===================================== AddUser Function
   Future<void> addUser(BuildContext context) async {
     final name = nameController.text.trim();
-
     final phoneNumber = phoneNumberController.text.trim();
-
     final uploadAdhaar = uploadAdhaarController.text.trim();
-
     final occupation = occupationController.text.trim();
-
     final checkin = checkInController.text.trim();
-
     final checkout = checkOutController.text.trim();
-
     final advanceAmount = advanceAmounntController.text.trim();
-
     final image = imgPath;
     print('$image');
     if (name.isEmpty ||

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentapp/Screens/Room/add_room.dart';
+import 'package:rentapp/Screens/User_list.dart';
 
 import 'package:rentapp/functions/db_room.dart';
 
@@ -67,14 +68,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(onPressed: () {}, icon: const Icon(Icons.home)),
-              IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.filter_alt_sharp)),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.filter_alt_sharp)),
               const SizedBox(
                 width: 60,
               ),
-              IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.currency_rupee)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.people)),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.currency_rupee)),
+              IconButton(onPressed: () {    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const User_List()));
+              }, icon: const Icon(Icons.people)),
             ],
           ),
         ),
