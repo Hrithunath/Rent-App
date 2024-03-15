@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rentapp/Screens/user/user_details.dart';
 import 'package:rentapp/functions/db_user.dart';
 import 'package:rentapp/model/user_model.dart';
+import 'package:rentapp/widgets/refactor_text.dart';
 
 class User_List extends StatefulWidget {
   const User_List({Key? key}) : super(key: key);
@@ -23,13 +24,7 @@ class _User_ListState extends State<User_List> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'User Details',
-            style: TextStyle(color: Colors.white),
-          ),
-          
-          centerTitle: true,
-        ),
+          title: const Text('User List')),
         body: Padding(
           padding: const EdgeInsets.all(20),
           child: ValueListenableBuilder<List<UserModel>>(
@@ -39,17 +34,38 @@ class _User_ListState extends State<User_List> {
                 itemBuilder: (context, index) {
                   final data = userList[index];
 
-                  return Card(
-                    child: ListTile(
-                      onTap: (){Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) =>  UserDetails(userModel: data)));},
-                      leading: CircleAvatar(
-                        backgroundImage: FileImage(File(data.image)),
-                        radius: 35,
+                  return Expanded(
+                    child: Card(
+                      elevation: 15,
+                      shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                      child: ListTile(
+                        onTap: (){Navigator.of(context).push(
+                         MaterialPageRoute(builder: (context) =>  UserDetails(userModel: data)));},
+                        leading: CircleAvatar(
+                          backgroundImage: FileImage(File(data.image)),
+                          radius: 35,
+                        ),
+                        title: Row(
+                          children: [
+                           
+                             buildLabeledText('Name', data.name,),
+
+                           const SizedBox(width: 30,),
+                            Text('CheckIn ${data.checkin}'),
+                    
+                          ],
+                        ),
+                      
+                        subtitle: Row(
+                          children: [
+                            
+                             buildLabeledText('PhoneNo', data.phoneNumber,),
+                          ],
+                        ),
+                       
                       ),
-                      title: Text('Name: ${data.name}'),
-                      subtitle: Text('Phone Number ${data.phoneNumber}'),
-                      trailing: Text('CheckIn: ${data.checkin}'),
                     ),
                   );
                 },

@@ -25,14 +25,7 @@ class _EditUserState extends State<EditUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Add User Details',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-        ),
-        backgroundColor: Colors.blue,
-      ),
+        title: const Text('Add User Details')),
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
@@ -131,46 +124,70 @@ class _EditUserState extends State<EditUser> {
                   Row(
                     children: [
                       Expanded(
-                        child: TextFormField(
-                          onTap: () {
-                            selectedCheckedIN(context);
+                        child: 
+                        // TextFormField(
+                        //   onTap: () {
+                        //     selectedCheckedIN(context);
+                        //   },
+
+                        //   controller: checkInController,
+                        //   readOnly: true,
+                        //   decoration: InputDecoration(
+                        //       labelText: 'Check in',
+                        //       border: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(15)),
+                        //       suffixIcon: const Icon(Icons.calendar_month)),
+
+                        //   validator: (value) {
+                        //     if (value == null || value.isEmpty) {
+                        //       return 'Check in is Required';
+                        //     } else {
+                        //       return null;
+                        //     }
+                        //   },
+                        //   autovalidateMode:
+                        //       AutovalidateMode.onUserInteraction
+                        // ),
+                        customTextfeild(controller: checkInController,
+                         keyboardTYpe: TextInputType.none, 
+                         labelText: 'CheckIn',
+                         
+                            validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Check out is Required';
+                            } else {
+                              return null;
+                            }
                           },
-
-                          controller: checkInController,
-                          readOnly: true,
-                          decoration: InputDecoration(
-                              labelText: 'Check in',
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              suffixIcon: const Icon(Icons.calendar_month)),
-
-                          // validator: (value) {
-                          //   if (value == null || value.isEmpty) {
-                          //     return 'Check in is Required';
-                          //   } else {
-                          //     return null;
-                          //   }
-                          // // },
-                          // autovalidateMode:
-                          //     AutovalidateMode.onUserInteraction
-                        ),
+                           autovalidateMode: AutovalidateMode.onUserInteraction),
                       ),
                       const SizedBox(
                         width: 12,
                       ),
                       Expanded(
-                        child: TextFormField(
-                          onTap: () {
-                            selectedCheckedOut(context);
-                          },
-                          controller: checkOutController,
-                          readOnly: true,
-                          decoration: InputDecoration(
-                              labelText: 'Check out',
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              suffixIcon: const Icon(Icons.calendar_month)),
-                        ),
+                        child:
+                        //  TextFormField(
+                        //   onTap: () {
+                        //     selectedCheckedOut(context);
+                        //   },
+                        //   controller: checkOutController,
+                        //   readOnly: true,
+                        //   decoration: InputDecoration(
+                        //       labelText: 'Check out',
+                        //       border: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(15)),
+                        //       suffixIcon: const Icon(Icons.calendar_month)),
+                        // ),
+                        customTextfeild(controller: checkOutController,
+                         keyboardTYpe: TextInputType.none, 
+                        labelText: 'CheckOut',
+                         validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Check out is Required';
+                            } else {
+                              return null;
+                            }
+                          },autovalidateMode: AutovalidateMode.onUserInteraction)
                       ),
                     ],
                   ),

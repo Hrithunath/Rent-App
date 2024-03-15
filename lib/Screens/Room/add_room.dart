@@ -38,12 +38,7 @@ class _AddRoomState extends State<AddRoom> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Add Room Details',
-          ),
-        ),
-      ),
+        title: const Text('Add Room Details')),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(

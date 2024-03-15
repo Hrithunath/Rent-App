@@ -33,8 +33,8 @@ class _EditRoomState extends State<EditRoom> {
 
   final rentController = TextEditingController();
   final ImagePicker _imagePicker = ImagePicker();
-  File? pickedImage;
-  String pickedImagePath = '';
+  // File? pickedImage;
+  // String pickedImagePath = '';
   String imgPath = '';
 
   @override
@@ -56,12 +56,7 @@ class _EditRoomState extends State<EditRoom> {
     int? id = widget.roomModel!.id;
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Edit Room Details',
-          ),
-        ),
-      ),
+        title: const Text('Edit Room Details')),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
@@ -211,9 +206,9 @@ class _EditRoomState extends State<EditRoom> {
         await _imagePicker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
-        pickedImage = File(pickedFile.path);
-        pickedImagePath = pickedFile.path;
-        imgPath = pickedImagePath;
+        // pickedImage = File(pickedFile.path);
+        // pickedImagePath = pickedFile.path;
+        imgPath = pickedFile.path;
       });
     }
   }

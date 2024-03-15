@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(
                 color: Color.fromARGB(255, 3, 12, 83),
                 titleTextStyle: TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold))),
+                    color: Colors.white, fontWeight: FontWeight.w900,fontSize:20 ),centerTitle: true)),
         home: const Home());
   }
 }

@@ -33,11 +33,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Home',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          centerTitle: true,
+          title: const Text('Home'),
           bottom: TabBar(
               controller: _tabController,
               indicatorColor: Colors.white,

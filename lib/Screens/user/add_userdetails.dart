@@ -45,19 +45,13 @@ class _AddUserState extends State<AddUser> {
   File? pickedImage;
   String pickedImagePath = '';
   String imgPath = '';
-
+   String imgPath2 = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Add User Details',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-        ),
-        backgroundColor: Colors.blue,
-      ),
+        title: const Text(
+          'Add User Details')),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -123,7 +117,7 @@ class _AddUserState extends State<AddUser> {
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       child: TextFormField(
                         controller: uploadAdhaarController,
-                        keyboardType: TextInputType.none,
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: 'Upload Adhaar',
                           border: OutlineInputBorder(
@@ -131,7 +125,7 @@ class _AddUserState extends State<AddUser> {
                           ),
                           suffixIcon: GestureDetector(
                             onTap: () {
-                              pickImage();
+                              UploadAdhaar();
                             },
                             child: Icon(Icons.upload_file),
                           ),
@@ -223,7 +217,8 @@ class _AddUserState extends State<AddUser> {
                               ),
                             ),
                           ),
-                        )),
+                        )
+                        ),
                       ],
                     ),
 
@@ -321,6 +316,18 @@ class _AddUserState extends State<AddUser> {
     }
   }
 
+
+  Future<void> UploadAdhaar() async {
+    final XFile? pickedFile =
+        await _imagePicker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        pickedImage = File(pickedFile.path);
+        imgPath2= pickedFile.path;
+        
+      });
+    }
+  }
   //===================================== AddUser Function
   Future<void> addUser(BuildContext context) async {
     final name = nameController.text.trim();
