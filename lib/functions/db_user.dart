@@ -13,9 +13,26 @@ Future<void> addUserAsync(UserModel value) async {
   userNotifier.notifyListeners();
 }
 
+//=====================================UpdateRoom
+Future<void> updateUserAsync(editUser, id) async {
+  final userDB = await Hive.openBox<UserModel>('user_db');
+  await userDB.put(editUser.id, editUser);
+  // roomNotifier.value.clear(); // Clear the list before updating
+  // roomNotifier.value.addAll(roomDB.values);
+  // roomNotifier.notifyListeners();
+}
+
 Future<void> getuser() async {
   final userDB = await Hive.openBox<UserModel>('user_db');
   userNotifier.value.clear();
   userNotifier.value.addAll(userDB.values);
+  userNotifier.notifyListeners();
+}
+
+//=====================================DeleteUser
+Future<void> deleteuser(int id) async {
+  final userDB = await Hive.openBox<UserModel>('user_db');
+  await userDB.delete(id);
+  await getuser();
   userNotifier.notifyListeners();
 }

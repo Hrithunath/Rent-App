@@ -1,31 +1,41 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:rentapp/functions/db_user.dart';
+import 'package:rentapp/Screens/user/edit_userdetails.dart';
 import 'package:rentapp/model/user_model.dart';
+import 'package:rentapp/widgets/refactor_edit.dart';
+import 'package:rentapp/widgets/refactor_text.dart';
 
 class UserDetails extends StatelessWidget {
   final UserModel userModel;
-
-  const UserDetails({required this.userModel, Key? key}) : super(key: key);
+  final String? imagepath;
+  UserDetails({required this.userModel, this.imagepath});
 
   @override
   Widget build(BuildContext context) {
+    int? id = userModel.id;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Full Details'),
-        actions: [IconButton(onPressed: (){}, icon: const Icon(Icons.edit))],
-        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              if (id != null) {
+                editAlert(context, id);
+              }
+            },
+            icon: const Icon(Icons.edit),
+          )
+        ],
+      ),
       body: Center(
         child: Container(
           width: 300,
           height: 550,
           child: Card(
-           elevation: 30,
-           shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-           
+            elevation: 30,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -36,96 +46,79 @@ class UserDetails extends StatelessWidget {
                     backgroundImage: FileImage(File(userModel.image)),
                   ),
                   const SizedBox(height: 20),
-                  const Text(
-                    'Name:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    userModel.name,
-                    
-                    style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 18),
-                  ),
+                  customText('Name', userModel.name, null),
                   const SizedBox(height: 10),
-                  const Text(
-                    'Phone Number:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    userModel.phoneNumber,
-                    style: const TextStyle(fontWeight:FontWeight.w500,fontSize: 16),
-                  ),
+                  customText('Phone Number', userModel.phoneNumber, null),
                   const SizedBox(height: 10),
-                  const Text(
-                    'Upload Adhaar:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
+                  customText(
+                    'UploadAdhaar',
                     userModel.uploadAdhaar,
-                    style: const TextStyle(fontWeight:FontWeight.w500,fontSize: 16),
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Occupation:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                    IconButton(
+                      onPressed: () {
+                        showUploadAdhaar(context, userModel.uploadAdhaar);
+                      },
+                      icon: const Icon(Icons.image_outlined),
                     ),
                   ),
-                  Text(
-                    userModel.occupation,
-                    style: const TextStyle(fontWeight:FontWeight.w500,fontSize: 16),
-                  ),
                   const SizedBox(height: 10),
-                  const Text(
-                    'Check-in:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    userModel.checkin,
-                    style: const TextStyle(fontWeight:FontWeight.w500,fontSize: 18),
-                  ),
+                  customText('Occupation', userModel.occupation, null),
                   const SizedBox(height: 10),
-                  const Text(
-                    'Check-out:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    userModel.checkout,
-                    style: const TextStyle(fontWeight:FontWeight.w500,fontSize: 18),
-                  ),
+                  customText('CheckIn', userModel.checkin, null),
                   const SizedBox(height: 10),
-                  const Text(
-                    'Advance Amount:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    userModel.advanceAmount,
-                    style: const TextStyle(fontWeight:FontWeight.w500,fontSize: 16),
-                  ),
+                  customText('CheckOut', userModel.checkout, null),
+                  const SizedBox(height: 10),
+                  customText('Advance Amount', userModel.advanceAmount, null),
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> showUploadAdhaar(BuildContext context, String imagePath) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('User Image'),
+          content: SizedBox(
+            width: 200,
+            height: 200,
+            child: Image.file(
+              File(imagePath),
+              fit: BoxFit.cover,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  editAlert(BuildContext context, int id) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return EditAlert(
+          onEdit: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => EditUser(userModel: userModel),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

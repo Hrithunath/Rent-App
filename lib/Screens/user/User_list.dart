@@ -6,7 +6,7 @@ import 'package:rentapp/model/user_model.dart';
 import 'package:rentapp/widgets/refactor_text.dart';
 
 class User_List extends StatefulWidget {
-  const User_List({Key? key}) : super(key: key);
+  const User_List({super.key});
 
   @override
   State<User_List> createState() => _User_ListState();
@@ -50,7 +50,7 @@ class _User_ListState extends State<User_List> {
                         title: Row(
                           children: [
                            
-                             buildLabeledText('Name', data.name,),
+                             customText('Name', data.name,null),
 
                            const SizedBox(width: 30,),
                             Text('CheckIn ${data.checkin}'),
@@ -61,7 +61,7 @@ class _User_ListState extends State<User_List> {
                         subtitle: Row(
                           children: [
                             
-                             buildLabeledText('PhoneNo', data.phoneNumber,),
+                             customText('Phone number', data.phoneNumber,null),
                           ],
                         ),
                        

@@ -82,15 +82,17 @@ class _UnoccupiedState extends State<Unoccupied> {
                               children: [
                                 IconButton(
                                     onPressed: () {
-                                      if(data.id !=null){
-                                            deleteAlert(context,data.id!);
-                                          }}, 
-                                          icon: const Icon(Icons.delete)),
+                                      if (data.id != null) {
+                                        deleteAlert(context, data.id!);
+                                      }
+                                    },
+                                    icon: const Icon(Icons.delete)),
                                 IconButton(
                                   onPressed: () {
-                                    if(data.id !=null){
-                                            editAlert(context,data.id!,roomList,index);
-                                          }
+                                    if (data.id != null) {
+                                      editAlert(
+                                          context, data.id!, roomList, index);
+                                    }
                                   },
                                   icon: const Icon(
                                     Icons.edit,
@@ -117,7 +119,10 @@ class _UnoccupiedState extends State<Unoccupied> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => AddUser(tabController: widget.tabController,)));
+                                        builder: (context) => AddUser(
+                                              tabController:
+                                                  widget.tabController,
+                                            )));
                               },
                               icon: const Icon(Icons.money_outlined),
                               label: const Text('Rent'),
@@ -142,20 +147,16 @@ class _UnoccupiedState extends State<Unoccupied> {
         );
       },
     );
-    
   }
-  
-  
-  editAlert(BuildContext context, int id, List<RoomModel> roomList,
-      int index) {
+
+  editAlert(BuildContext context, int id, List<RoomModel> roomList, int index) {
     showDialog(
         context: context,
         builder: (context) {
           return EditAlert(onEdit: () {
             Navigator.of(context).pop();
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>
-                    EditRoom(roomModel: roomList[index])));
+                builder: (context) => EditRoom(roomModel: roomList[index])));
           });
         });
   }
@@ -170,5 +171,4 @@ class _UnoccupiedState extends State<Unoccupied> {
           });
         });
   }
-
 }

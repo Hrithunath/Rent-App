@@ -5,6 +5,7 @@ import 'package:rentapp/Screens/Room/home.dart';
 import 'package:rentapp/functions/db_room.dart';
 import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/widgets/refactor_button.dart';
+import 'package:rentapp/widgets/refactor_snackbar.dart';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
 class AddRoom extends StatefulWidget {
@@ -37,8 +38,7 @@ class _AddRoomState extends State<AddRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Room Details')),
+      appBar: AppBar(title: const Text('Add Room Details')),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(
@@ -174,24 +174,18 @@ class _AddRoomState extends State<AddRoom> {
 
                 button(
                     buttonText: 'save',
-                    buttonPressed: ()async {
+                    buttonPressed: () async {
                       // final data = widget.roomModel;
                       if (
-                        // data != null &&
-                        ischeckroomNo(roomNoController.text)) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            behavior: SnackBarBehavior.floating,
-                            backgroundColor: Colors.red,
-                            margin: EdgeInsets.all(10),
-                            content: Text(
-                              'Item Already added',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        );
+                          // data != null &&
+                          ischeckroomNo(roomNoController.text)) {
+                        CustomSnackBar(
+                            context, 'Room Number Already Added', Colors.red);
                       } else {
-                        addRoom(context);
+                        
+                        CustomSnackBar(context, 'Room Number Added SuccesFully',
+                            const Color.fromARGB(255, 13, 71, 161));
+                            addRoom(context);
                       }
                     })
               ],
@@ -240,7 +234,7 @@ class _AddRoomState extends State<AddRoom> {
           bed: bed,
           rent: rent,
           image: image);
-      print('room1');
+     
       addRoomAsync(addRooms);
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const Home()));

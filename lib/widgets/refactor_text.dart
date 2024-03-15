@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
-Widget buildLabeledText(String label, String text) {
+Widget customText(String label, String text, IconButton? iconButton) {
   return Expanded(
     child: Row(
       children: [
         Text(
           '$label: ',
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontSize: 18,
           ),
         ),
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
         ),
+        if(iconButton!=null)iconButton,
       ],
     ),
   );
