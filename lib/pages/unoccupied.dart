@@ -48,7 +48,9 @@ class _UnoccupiedState extends State<Unoccupied> {
                           ),
                         ),
                       ),
-                      
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
@@ -61,13 +63,14 @@ class _UnoccupiedState extends State<Unoccupied> {
                                 fontSize: 20,
                               ),
                             ),
-                            SizedBox(height: 1,),
+                            const SizedBox(
+                              height: 1,
+                            ),
                             Row(
                               children: [
                                 Text(
                                   'Floor: ${data.floor}',
                                   style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
                                     fontSize: 15,
                                   ),
                                 ),
@@ -75,7 +78,6 @@ class _UnoccupiedState extends State<Unoccupied> {
                                 Text(
                                   'Guests: ${data.guests}',
                                   style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
                                     fontSize: 15,
                                   ),
                                 ),
@@ -83,7 +85,6 @@ class _UnoccupiedState extends State<Unoccupied> {
                                 Text(
                                   'Bed: ${data.bed}',
                                   style: const TextStyle(
-                                    // fontWeight: FontWeight.bold,
                                     fontSize: 15,
                                   ),
                                 ),
@@ -96,21 +97,22 @@ class _UnoccupiedState extends State<Unoccupied> {
                                             deleteAlert(context, data.id!);
                                           }
                                         },
-                                        icon: const Icon(Icons.delete,
-                                        color: Colors.red,)),
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        )),
                                     IconButton(
                                       onPressed: () {
                                         if (data.id != null) {
-                                          editAlert(
-                                              context, data.id!, roomList, index);
+                                          editAlert(context, data.id!, roomList,
+                                              index);
                                         }
                                       },
                                       icon: const Icon(
                                         Icons.edit,
-                                       
                                         color: Color.fromARGB(255, 50, 62, 73),
                                       ),
-                                      iconSize: 10,
+                                      iconSize: 20,
                                     ),
                                   ],
                                 )
@@ -120,7 +122,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '₹: ${data.rent}',
+                                  '₹${data.rent}',
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -129,27 +131,43 @@ class _UnoccupiedState extends State<Unoccupied> {
                                 ElevatedButton.icon(
                                   onPressed: () {
                                     Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => AddUser(
-                                                  tabController:
-                                                      widget.tabController,
-                                                )));
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AddUser(
+                                          tabController: widget.tabController,
+                                        ),
+                                      ),
+                                    );
                                   },
-                                  icon: const Icon(Icons.currency_rupee),
-                                  label: const Text('Rent',
-                                     style: TextStyle(
-                                     color: Color.fromARGB(255, 3, 12, 83), 
+                                  icon: const Icon(
+                                    Icons.currency_rupee,
+                                    color: Colors.white,
+                                  ),
+                                  label: const Text(
+                                    'Rent',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  
                                   style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
-                                      Colors.green
+                                            Colors.green),
+                                    elevation:
+                                        MaterialStateProperty.all<double>(8),
+                                    padding: MaterialStateProperty.all<
+                                        EdgeInsetsGeometry>(
+                                      const EdgeInsets.all(12),
+                                    ),
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
                                     ),
                                   ),
-                                
                                 )
                               ],
                             ),
