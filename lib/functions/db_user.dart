@@ -6,6 +6,7 @@ import 'package:rentapp/model/user_model.dart';
 
 ValueNotifier<List<UserModel>> userNotifier = ValueNotifier([]);
 
+ //===================================== AddUser
 Future<void> addUserAsync(UserModel value) async {
   print('enter function');
   final userDB = await Hive.openBox<UserModel>('user_db');
@@ -30,6 +31,7 @@ Future<void> updateUserAsync(UserModel editUser, id) async {
   // roomNotifier.notifyListeners();
 }
 
+ //===================================== GetUser
 Future<void> getuser() async {
   final userDB = await Hive.openBox<UserModel>('user_db');
   userNotifier.value.clear();

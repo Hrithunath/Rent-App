@@ -79,6 +79,8 @@ class _EditUserState extends State<EditUser> {
                               ? FileImage(File(imgPath))
                               : FileImage(File(widget.userModel!.image))),
                     ),
+
+                     //===================================== Name
                     customTextfeild(
                       controller: nameController,
                       keyboardTYpe: TextInputType.text,
@@ -91,6 +93,8 @@ class _EditUserState extends State<EditUser> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
+
+                     //===================================== PhoneNumber
                     customTextfeild(
                       controller: phoneNumberController,
                       keyboardTYpe: TextInputType.phone,
@@ -145,6 +149,7 @@ class _EditUserState extends State<EditUser> {
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction),
 
+                    //===================================== Occupation
                     customTextfeild(
                       controller: occupationController,
                       keyboardTYpe: TextInputType.text,
@@ -184,6 +189,8 @@ class _EditUserState extends State<EditUser> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.only(right: 20),
+
+                             //===================================== CheckOut
                             child: TextFormField(
                               controller: checkOutController,
                               keyboardType: TextInputType.none,
@@ -208,7 +215,7 @@ class _EditUserState extends State<EditUser> {
                     const SizedBox(
                       height: 10,
                     ),
-
+                     //===================================== AdvanceAmount
                     customTextfeild(
                       controller: advanceAmounntController,
                       keyboardTYpe: TextInputType.number,
@@ -224,6 +231,8 @@ class _EditUserState extends State<EditUser> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+
+                         //===================================== DeleteButton
                         button(
                           buttonText: 'Delete',
                           buttonPressed: () {
@@ -233,6 +242,8 @@ class _EditUserState extends State<EditUser> {
                           },
                         ),
                         const SizedBox(width: 10),
+
+                        //===================================== Save
                         button(
                           buttonText: 'Save',
                           buttonPressed: () {
@@ -251,6 +262,7 @@ class _EditUserState extends State<EditUser> {
     );
   }
 
+ //===================================== CheckIn Function
   Future<void> selectedCheckedIN(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -266,6 +278,7 @@ class _EditUserState extends State<EditUser> {
     }
   }
 
+ //===================================== CheckOut Function
   Future<void> selectedCheckedOut(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -287,6 +300,7 @@ class _EditUserState extends State<EditUser> {
     }
   }
 
+ //===================================== UserImagePick Function
   Future<void> pickImage() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -298,6 +312,7 @@ class _EditUserState extends State<EditUser> {
     }
   }
 
+ //===================================== UploadAdhaarImage Function
   Future<void> uploadAdhaar() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -309,6 +324,7 @@ class _EditUserState extends State<EditUser> {
     }
   }
 
+ //===================================== EditUser Function
   Future<void> editUser(BuildContext context, int? id) async {
     if (formkey.currentState!.validate()) {
       final name = nameController.text.trim();
@@ -349,6 +365,8 @@ class _EditUserState extends State<EditUser> {
       );
     }
   }
+
+ //===================================== ShowSnackbar Delete Function
 
   deleteAlert(BuildContext context, int id) {
     showDialog(

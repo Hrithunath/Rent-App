@@ -125,17 +125,7 @@ class _AddUserState extends State<AddUser> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                     ),
-                    // customTextfeild(controller: uploadAdhaarController,
-                    // keyboardTYpe: TextInputType.name,
-                    // labelText: 'uploadAdhaar',
-                    // validator: (value) {
-                    //     if (value == null || value.isEmpty) {
-                    //       return 'Upload Adhaar is Required';
-                    //     }
-                    //     return null;
-                    //   },
-                    //  autovalidateMode: AutovalidateMode.onUserInteraction),
-
+                
                     //===================================== Occupation
                     customTextfeild(
                       controller: occupationController,
@@ -188,25 +178,7 @@ class _AddUserState extends State<AddUser> {
                                 },
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction)
-                            //         Padding(
-                            //   padding: const EdgeInsets.only(right: 20),
-                            //   child: TextFormField(
-                            //     controller: checkOutController,
-                            //     keyboardType: TextInputType.none,
-                            //     onTap: () {
-                            //       selectedCheckedOut(context);
-                            //     },
-                            //     decoration: InputDecoration(
-                            //       labelText: 'Check Out',
-                            //       border: OutlineInputBorder(
-                            //         borderRadius: BorderRadius.circular(15),
-                            //       ),
-                            //       suffixIcon: GestureDetector(
-                            //         child: Icon(Icons.calendar_month),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // )
+                            
                             ),
                       ],
                     ),
@@ -266,8 +238,8 @@ class _AddUserState extends State<AddUser> {
       });
     }
   }
-  //===================================== CheckOut Function
 
+  //===================================== CheckOut Function
   Future<void> selectedCheckedOut(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -301,6 +273,7 @@ class _AddUserState extends State<AddUser> {
     }
   }
 
+//===================================== UploadAdhaar Function
   Future<void> UploadAdhaar() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);

@@ -35,8 +35,7 @@ class _UserListState extends State<UserList> {
               return ListView.separated(
                 itemBuilder: (context, index) {
                   final data = userList[index];
-
-                  return Card(
+                    return Card(
                     elevation: 15,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -52,12 +51,16 @@ class _UserListState extends State<UserList> {
                       ),
                       title: Row(
                         children: [
+
+                           //===================================== Name
                           customText('Name', data.name, null),
                        
                         ],
                       ),
                       subtitle: Row(
                         children: [
+
+                           //===================================== PhoneNumber
                           customText('Phone number', data.phoneNumber, null),
                         ],
                       ),

@@ -54,13 +54,21 @@ class _UserDetailsState extends State<UserDetails> {
                     backgroundImage: FileImage(File(widget.userModel.image)),
                   ),
                   const SizedBox(height: 20),
+
+                   //===================================== name
                   customText('Name', widget.userModel.name, null),
                   const SizedBox(height: 10),
+
+                   //===================================== PhoneNumber
                   customText('Phone Number', widget.userModel.phoneNumber, null),
                   const SizedBox(height: 10),
+
+                   //===================================== UploadAdhaar
                   customText(
                     'UploadAdhaar',
                   'Adhaar',
+
+                   //===================================== IconImage Button
                     IconButton(
                       onPressed: () {
                         showUploadAdhaar(context, widget.userModel.uploadAdhaar);
@@ -69,12 +77,20 @@ class _UserDetailsState extends State<UserDetails> {
                     ),
                   ),
                   const SizedBox(height: 10),
+
+                   //===================================== Occupation
                   customText('Occupation', widget.userModel.occupation, null),
                   const SizedBox(height: 10),
+
+                   //===================================== CheckIn
                   customText('CheckIn', widget.userModel.checkin, null),
                   const SizedBox(height: 10),
+
+                   //===================================== CheckOut
                   customText('CheckOut', widget.userModel.checkout, null),
                   const SizedBox(height: 10),
+
+                   //===================================== AdvanceAmount
                   customText('Advance Amount', widget.userModel.advanceAmount, null),
                 ],
               ),
@@ -84,7 +100,7 @@ class _UserDetailsState extends State<UserDetails> {
       ),
     );
   }
-
+  //===================================== ShowUploadAdhaar Function
   Future<void> showUploadAdhaar(BuildContext context, String imagePath) async {
     return showDialog<void>(
       context: context,
@@ -111,7 +127,7 @@ class _UserDetailsState extends State<UserDetails> {
       },
     );
   }
-
+ //===================================== ShowSnackBar Edit Function
   editAlert(BuildContext context, int id) {
     showDialog(
       context: context,
