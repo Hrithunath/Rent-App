@@ -9,6 +9,7 @@ import 'package:rentapp/model/user_model.dart';
 import 'package:rentapp/widgets/refactor_button.dart';
 import 'package:rentapp/widgets/refactor_calender.dart';
 import 'package:rentapp/widgets/refactor_delete.dart';
+import 'package:rentapp/widgets/refactor_snackbar.dart';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
 class EditUser extends StatefulWidget {
@@ -80,7 +81,7 @@ class _EditUserState extends State<EditUser> {
                               : FileImage(File(widget.userModel!.image))),
                     ),
 
-                     //===================================== Name
+                    //===================================== Name
                     customTextfeild(
                       controller: nameController,
                       keyboardTYpe: TextInputType.text,
@@ -94,7 +95,7 @@ class _EditUserState extends State<EditUser> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
 
-                     //===================================== PhoneNumber
+                    //===================================== PhoneNumber
                     customTextfeild(
                       controller: phoneNumberController,
                       keyboardTYpe: TextInputType.phone,
@@ -190,7 +191,7 @@ class _EditUserState extends State<EditUser> {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 20),
 
-                             //===================================== CheckOut
+                            //===================================== CheckOut
                             child: TextFormField(
                               controller: checkOutController,
                               keyboardType: TextInputType.none,
@@ -215,7 +216,7 @@ class _EditUserState extends State<EditUser> {
                     const SizedBox(
                       height: 10,
                     ),
-                     //===================================== AdvanceAmount
+                    //===================================== AdvanceAmount
                     customTextfeild(
                       controller: advanceAmounntController,
                       keyboardTYpe: TextInputType.number,
@@ -231,8 +232,7 @@ class _EditUserState extends State<EditUser> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
-                         //===================================== DeleteButton
+                        //===================================== DeleteButton
                         button(
                           buttonText: 'Delete',
                           buttonPressed: () {
@@ -262,7 +262,7 @@ class _EditUserState extends State<EditUser> {
     );
   }
 
- //===================================== CheckIn Function
+  //===================================== CheckIn Function
   Future<void> selectedCheckedIN(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -278,7 +278,7 @@ class _EditUserState extends State<EditUser> {
     }
   }
 
- //===================================== CheckOut Function
+  //===================================== CheckOut Function
   Future<void> selectedCheckedOut(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -300,7 +300,7 @@ class _EditUserState extends State<EditUser> {
     }
   }
 
- //===================================== UserImagePick Function
+  //===================================== UserImagePick Function
   Future<void> pickImage() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -312,7 +312,7 @@ class _EditUserState extends State<EditUser> {
     }
   }
 
- //===================================== UploadAdhaarImage Function
+  //===================================== UploadAdhaarImage Function
   Future<void> uploadAdhaar() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -324,7 +324,7 @@ class _EditUserState extends State<EditUser> {
     }
   }
 
- //===================================== EditUser Function
+  //===================================== EditUser Function
   Future<void> editUser(BuildContext context, int? id) async {
     if (formkey.currentState!.validate()) {
       final name = nameController.text.trim();
@@ -359,15 +359,19 @@ class _EditUserState extends State<EditUser> {
       );
 
       await updateUserAsync(editUser, widget.userModel!.id);
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-            builder: (context) => UserDetails(userModel: editUser)),
-      );
+
+      CustomSnackBar(context, 'Edited User Details SuccesFully',
+          const Color.fromARGB(255, 3, 12, 83));
+      Future.delayed(const Duration(seconds: 1), () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+              builder: (context) => UserDetails(userModel: editUser)),
+        );
+      });
     }
   }
 
- //===================================== ShowSnackbar Delete Function
-
+  //===================================== ShowSnackbar Delete Function
   deleteAlert(BuildContext context, int id) {
     showDialog(
       context: context,

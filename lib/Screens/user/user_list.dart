@@ -7,6 +7,7 @@ import 'package:rentapp/model/user_model.dart';
 import 'package:rentapp/widgets/refactor_text.dart';
 
 class UserList extends StatefulWidget {
+  // ignore: use_key_in_widget_constructors
   const UserList({Key? key});
 
   @override
@@ -54,8 +55,7 @@ class _UserListState extends State<UserList> {
 
                            //===================================== Name
                           customText('Name', data.name, null),
-                       
-                        ],
+                       ],
                       ),
                       subtitle: Row(
                         children: [
@@ -67,6 +67,7 @@ class _UserListState extends State<UserList> {
                     ),
                   );
                 },
+                
                 separatorBuilder: (context, index) => const SizedBox(
                   height: 15,
                 ),

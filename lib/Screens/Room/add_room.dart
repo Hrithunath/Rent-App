@@ -19,20 +19,14 @@ class AddRoom extends StatefulWidget {
 }
 
 class _AddRoomState extends State<AddRoom> {
+
   final formkey = GlobalKey<FormState>();
-
   final roomNoController = TextEditingController();
-
   final floorController = TextEditingController();
-
   final guestsController = TextEditingController();
-
   final bedController = TextEditingController();
-
   final rentController = TextEditingController();
   final ImagePicker _imagePicker = ImagePicker();
-  // File? pickedImage;
-  // String pickedImagePath = '';
   String imgPath = '';
 
   @override
@@ -55,7 +49,7 @@ class _AddRoomState extends State<AddRoom> {
                     borderRadius: BorderRadius.circular(15),
 
                     // ignore: unnecessary_null_comparison
-                    image: imgPath != null
+                        image: imgPath != null
                         ? DecorationImage(
                             image: FileImage(File(imgPath)),
                             fit: BoxFit.cover,
@@ -75,10 +69,6 @@ class _AddRoomState extends State<AddRoom> {
                       )),
                 ),
 
-                // const SizedBox(
-                //   height: 20,
-                // ),
-
                 //===================================== Room No
                 customTextfeild(
                   controller: roomNoController,
@@ -94,10 +84,6 @@ class _AddRoomState extends State<AddRoom> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
 
-                // const SizedBox(
-                //   height: 15,
-                // ),
-
                 //===================================== Floor
                 customTextfeild(
                     controller: floorController,
@@ -111,10 +97,6 @@ class _AddRoomState extends State<AddRoom> {
                       }
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
-
-                // const SizedBox(
-                //   height: 15,
-                // ),
 
                 //===================================== Guests
                 customTextfeild(
@@ -130,10 +112,6 @@ class _AddRoomState extends State<AddRoom> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                // const SizedBox(
-                //   height: 15,
-                // ),
-
                 //===================================== Bed
                 customTextfeild(
                     controller: bedController,
@@ -147,10 +125,6 @@ class _AddRoomState extends State<AddRoom> {
                       }
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
-
-                // const SizedBox(
-                //   height: 15,
-                // ),
 
                 //===================================== Rent
                 customTextfeild(
@@ -166,12 +140,7 @@ class _AddRoomState extends State<AddRoom> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                // const SizedBox(
-                //   height: 15,
-                // ),
-
                 //===================================== Add Button
-
                 button(
                     buttonText: 'save',
                     buttonPressed: () async {
@@ -196,8 +165,6 @@ class _AddRoomState extends State<AddRoom> {
         await _imagePicker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
-        // pickedImage = File(pickedFile.path);
-        // pickedImagePath = pickedFile.path;
         imgPath = pickedFile.path;
       });
     }

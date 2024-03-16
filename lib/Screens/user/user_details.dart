@@ -16,9 +16,7 @@ class UserDetails extends StatefulWidget {
 
 class _UserDetailsState extends State<UserDetails> {
 
-  
-
-  @override
+   @override
   Widget build(BuildContext context) {
     int? id = widget.userModel.id;
     return Scaffold(
@@ -31,7 +29,7 @@ class _UserDetailsState extends State<UserDetails> {
                 editAlert(context, id);
               }
             },
-            icon: const Icon(Icons.edit),
+            icon:  const Icon(Icons.edit),color: Colors.white,
           )
         ],
       ),
@@ -100,6 +98,7 @@ class _UserDetailsState extends State<UserDetails> {
       ),
     );
   }
+
   //===================================== ShowUploadAdhaar Function
   Future<void> showUploadAdhaar(BuildContext context, String imagePath) async {
     return showDialog<void>(
@@ -127,6 +126,7 @@ class _UserDetailsState extends State<UserDetails> {
       },
     );
   }
+  
  //===================================== ShowSnackBar Edit Function
   editAlert(BuildContext context, int id) {
     showDialog(

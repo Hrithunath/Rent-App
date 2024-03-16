@@ -7,6 +7,7 @@ import 'package:rentapp/functions/db_user.dart';
 import 'package:rentapp/model/user_model.dart';
 import 'package:rentapp/widgets/refactor_button.dart';
 import 'package:rentapp/widgets/refactor_calender.dart';
+import 'package:rentapp/widgets/refactor_snackbar.dart';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
 class AddUser extends StatefulWidget {
@@ -23,19 +24,12 @@ class AddUser extends StatefulWidget {
 
 class _AddUserState extends State<AddUser> {
   final formkey = GlobalKey<FormState>();
-
   final nameController = TextEditingController();
-
   final phoneNumberController = TextEditingController();
-
   final uploadAdhaarController = TextEditingController();
-
   final occupationController = TextEditingController();
-
   final checkInController = TextEditingController();
-
   final checkOutController = TextEditingController();
-
   final advanceAmounntController = TextEditingController();
 
   DateTime? seletedCheckInDate;
@@ -106,10 +100,10 @@ class _AddUserState extends State<AddUser> {
 
                     //===================================== Upload Adhaar
                     Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(15),
                       child: TextFormField(
                         controller: uploadAdhaarController,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           labelText: 'Upload Adhaar',
                           border: OutlineInputBorder(
@@ -125,7 +119,17 @@ class _AddUserState extends State<AddUser> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                     ),
-                
+                    // customTextfeild(controller: uploadAdhaarController,
+                    // keyboardTYpe: TextInputType.name,
+                    // labelText: 'uploadAdhaar',
+                    // validator: (value) {
+                    //     if (value == null || value.isEmpty) {
+                    //       return 'Upload Adhaar is Required';
+                    //     }
+                    //     return null;
+                    //   },
+                    //  autovalidateMode: AutovalidateMode.onUserInteraction),
+
                     //===================================== Occupation
                     customTextfeild(
                       controller: occupationController,
@@ -177,9 +181,7 @@ class _AddUserState extends State<AddUser> {
                                   return null;
                                 },
                                 autovalidateMode:
-                                    AutovalidateMode.onUserInteraction)
-                            
-                            ),
+                                    AutovalidateMode.onUserInteraction)),
                       ],
                     ),
 
@@ -273,7 +275,6 @@ class _AddUserState extends State<AddUser> {
     }
   }
 
-//===================================== UploadAdhaar Function
   Future<void> UploadAdhaar() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -318,8 +319,12 @@ class _AddUserState extends State<AddUser> {
         image: image);
 
     await addUserAsync(addUser);
-    print(' user $addUser');
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const UserList()));
+
+    CustomSnackBar(context, 'UserDetails Added SuccesFully',
+        const Color.fromARGB(255, 3, 12, 83));
+    Future.delayed(const Duration(seconds: 1), () {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const UserList()));
+    });
   }
 }

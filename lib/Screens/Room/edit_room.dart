@@ -5,16 +5,16 @@ import 'package:rentapp/Screens/Room/home.dart';
 import 'package:rentapp/functions/db_room.dart';
 import 'package:rentapp/model/room_model.dart';
 import 'package:rentapp/widgets/refactor_button.dart';
+import 'package:rentapp/widgets/refactor_snackbar.dart';
 import 'package:rentapp/widgets/refactor_text_feild.dart';
 
 class EditRoom extends StatefulWidget {
   final RoomModel? roomModel;
-  
-  const EditRoom(
-      {super.key,
-     
-      required this.roomModel,
-     });
+
+  const EditRoom({
+    super.key,
+    required this.roomModel,
+  });
 
   @override
   State<EditRoom> createState() => _EditRoomState();
@@ -22,41 +22,30 @@ class EditRoom extends StatefulWidget {
 
 class _EditRoomState extends State<EditRoom> {
   final formkey = GlobalKey<FormState>();
-
   final roomNoController = TextEditingController();
-
   final floorController = TextEditingController();
-
   final guestsController = TextEditingController();
-
   final bedController = TextEditingController();
-
   final rentController = TextEditingController();
   final ImagePicker _imagePicker = ImagePicker();
-  // File? pickedImage;
-  // String pickedImagePath = '';
   String imgPath = '';
 
   @override
   void initState() {
     super.initState();
-    
     roomNoController.text = widget.roomModel!.room;
     floorController.text = widget.roomModel!.floor;
     guestsController.text = widget.roomModel!.guests;
     bedController.text = widget.roomModel!.bed;
     rentController.text = widget.roomModel!.rent;
     imgPath = widget.roomModel!.image;
-   
-    // }
   }
 
   @override
   Widget build(BuildContext context) {
     int? id = widget.roomModel!.id;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit Room Details')),
+      appBar: AppBar(title: const Text('Edit Room Details')),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
@@ -92,10 +81,6 @@ class _EditRoomState extends State<EditRoom> {
                       )),
                 ),
 
-                // const SizedBox(
-                //   height: 20,
-                // ),
-
                 //===================================== Room No
                 customTextfeild(
                   controller: roomNoController,
@@ -111,10 +96,6 @@ class _EditRoomState extends State<EditRoom> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
 
-                // const SizedBox(
-                //   height: 15,
-                // ),
-
                 //===================================== Floor
                 customTextfeild(
                     controller: floorController,
@@ -128,10 +109,6 @@ class _EditRoomState extends State<EditRoom> {
                       }
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
-
-                // const SizedBox(
-                //   height: 15,
-                // ),
 
                 //===================================== Guests
                 customTextfeild(
@@ -147,10 +124,6 @@ class _EditRoomState extends State<EditRoom> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                // const SizedBox(
-                //   height: 15,
-                // ),
-
                 //===================================== Bed
                 customTextfeild(
                     controller: bedController,
@@ -164,10 +137,6 @@ class _EditRoomState extends State<EditRoom> {
                       }
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
-
-                // const SizedBox(
-                //   height: 15,
-                // ),
 
                 //===================================== Rent
                 customTextfeild(
@@ -183,14 +152,11 @@ class _EditRoomState extends State<EditRoom> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                // const SizedBox(
-                //   height: 15,
-                // ),
-
+                //===================================== Rent
                 button(
                     buttonText: 'save',
                     buttonPressed: () {
-                      editRoom(context,id);
+                      editRoom(context, id);
                     })
               ],
             ),
@@ -206,14 +172,12 @@ class _EditRoomState extends State<EditRoom> {
         await _imagePicker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
-        // pickedImage = File(pickedFile.path);
-        // pickedImagePath = pickedFile.path;
         imgPath = pickedFile.path;
       });
     }
   }
 
-//=====================================Add Room
+//=====================================Edit Room
   Future<void> editRoom(BuildContext context, int? id) async {
     if (formkey.currentState!.validate()) {
       final room = roomNoController.text.trim();
@@ -239,11 +203,15 @@ class _EditRoomState extends State<EditRoom> {
           bed: bed,
           rent: rent,
           image: image);
+
       await updateRoomAsync(editRooms, id);
 
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Home()));
+      CustomSnackBar(context, 'Edited the Room Details SuccesFully',
+          const Color.fromARGB(255, 3, 12, 83));
+      Future.delayed(const Duration(seconds: 1), () {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const Home()));
+      });
     }
   }
 }

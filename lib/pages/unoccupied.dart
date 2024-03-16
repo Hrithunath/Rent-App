@@ -88,7 +88,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                     fontSize: 15,
                                   ),
                                 ),
-                                const SizedBox(width: 20),
+                                const SizedBox(width: 18),
                                 Row(
                                   children: [
                                     IconButton(

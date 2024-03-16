@@ -84,7 +84,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         onPressed: () {},
         icon: const Icon(
           Icons.currency_rupee,
-           color: Color.fromARGB(255, 50, 62, 73), 
+                  color: Color.fromARGB(255, 50, 62, 73), 
         ),
       ),
       IconButton(
@@ -110,9 +110,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
     );
   }
-
+  //===================================== AddRoom Navigation
   void addRoom() {
-    // print('ID value: $id');
     Navigator.push(
       context,
       MaterialPageRoute(
