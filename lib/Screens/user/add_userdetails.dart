@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:rentapp/Screens/user/User_list.dart';
+import 'package:rentapp/Screens/user/user_list.dart';
 import 'package:rentapp/functions/db_user.dart';
 import 'package:rentapp/model/user_model.dart';
 import 'package:rentapp/widgets/refactor_button.dart';
@@ -45,13 +45,11 @@ class _AddUserState extends State<AddUser> {
   File? pickedImage;
   String pickedImagePath = '';
   String imgPath = '';
-   String imgPath2 = '';
+  String imgPath2 = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Add User Details')),
+      appBar: AppBar(title: const Text('Add User Details')),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -67,15 +65,13 @@ class _AddUserState extends State<AddUser> {
                       onTap: pickImage,
                       child: CircleAvatar(
                         radius: 70,
-                        backgroundImage: pickedImage != null
-                            ? FileImage(pickedImage!)
+                        backgroundImage: imgPath.isNotEmpty
+                            ? FileImage(File(imgPath))
                             : const AssetImage("assets/images/profile.jpg")
                                 as ImageProvider,
                       ),
                     ),
-                    // const SizedBox(
-                    //   height:10,
-                    // ),
+
                     //===================================== Name
                     customTextfeild(
                       controller: nameController,
@@ -89,9 +85,7 @@ class _AddUserState extends State<AddUser> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
-                    // const SizedBox(
-                    //   height:1,
-                    // ),
+
                     //===================================== Phone Number
                     customTextfeild(
                       controller: phoneNumberController,
@@ -109,12 +103,10 @@ class _AddUserState extends State<AddUser> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
-                    // const SizedBox(
-                    //   height:10,
-                    // ),
+
                     //===================================== Upload Adhaar
                     Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      padding: const EdgeInsets.all(15.0),
                       child: TextFormField(
                         controller: uploadAdhaarController,
                         keyboardType: TextInputType.number,
@@ -127,21 +119,23 @@ class _AddUserState extends State<AddUser> {
                             onTap: () {
                               UploadAdhaar();
                             },
-                            child: Icon(Icons.upload_file),
+                            child: const Icon(Icons.upload_file),
                           ),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Upload Adhaar is Required';
-                          }
-                          return null;
-                        },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                     ),
-                    // const SizedBox(
-                    //   height:10,
-                    // ),
+                    // customTextfeild(controller: uploadAdhaarController,
+                    // keyboardTYpe: TextInputType.name,
+                    // labelText: 'uploadAdhaar',
+                    // validator: (value) {
+                    //     if (value == null || value.isEmpty) {
+                    //       return 'Upload Adhaar is Required';
+                    //     }
+                    //     return null;
+                    //   },
+                    //  autovalidateMode: AutovalidateMode.onUserInteraction),
+
                     //===================================== Occupation
                     customTextfeild(
                       controller: occupationController,
@@ -155,9 +149,9 @@ class _AddUserState extends State<AddUser> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
+                    const SizedBox(
+                      height: 10,
+                    ),
 
                     //===================================== CheckIn
                     Row(
@@ -178,53 +172,48 @@ class _AddUserState extends State<AddUser> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                         )),
 
-                        // const SizedBox(
-                        //   width: 12,
-                        // ),
-
                         //===================================== CheckOut
                         Expanded(
-                            child:
-                                //  customtextFeildcalender(
-                                //     controller: checkOutController,
-                                //     onTapcalender: () {
-                                //       selectedCheckedOut(context);
-                                //     },
-                                //     labeltext: 'CheckOut',
-                                //     validator: (value) {
-                                //       if (value == null || value.isEmpty) {
-                                //         return 'CheckOut is Required';
-                                //       }
-                                //       return null;
-                                //     },
-                                //     autovalidateMode:
-                                //         AutovalidateMode.onUserInteraction)
-                                Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: TextFormField(
-                            controller: checkOutController,
-                            keyboardType: TextInputType.none,
-                            onTap: () {
-                              selectedCheckedOut(context);
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'Check Out',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              suffixIcon: GestureDetector(
-                                child: Icon(Icons.calendar_month),
-                              ),
+                            child: customtextFeildcalender(
+                                controller: checkOutController,
+                                onTapcalender: () {
+                                  selectedCheckedOut(context);
+                                },
+                                labeltext: 'CheckOut',
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'CheckOut is Required';
+                                  }
+                                  return null;
+                                },
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction)
+                            //         Padding(
+                            //   padding: const EdgeInsets.only(right: 20),
+                            //   child: TextFormField(
+                            //     controller: checkOutController,
+                            //     keyboardType: TextInputType.none,
+                            //     onTap: () {
+                            //       selectedCheckedOut(context);
+                            //     },
+                            //     decoration: InputDecoration(
+                            //       labelText: 'Check Out',
+                            //       border: OutlineInputBorder(
+                            //         borderRadius: BorderRadius.circular(15),
+                            //       ),
+                            //       suffixIcon: GestureDetector(
+                            //         child: Icon(Icons.calendar_month),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // )
                             ),
-                          ),
-                        )
-                        ),
                       ],
                     ),
 
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
+                    const SizedBox(
+                      height: 10,
+                    ),
 
                     //===================================== Advance Amount
                     customTextfeild(
@@ -239,9 +228,6 @@ class _AddUserState extends State<AddUser> {
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
                     //===================================== Save Button
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -311,11 +297,9 @@ class _AddUserState extends State<AddUser> {
       setState(() {
         pickedImage = File(pickedFile.path);
         imgPath = pickedFile.path;
-        
       });
     }
   }
-
 
   Future<void> UploadAdhaar() async {
     final XFile? pickedFile =
@@ -323,11 +307,11 @@ class _AddUserState extends State<AddUser> {
     if (pickedFile != null) {
       setState(() {
         pickedImage = File(pickedFile.path);
-        imgPath2= pickedFile.path;
-        
+        imgPath2 = pickedFile.path;
       });
     }
   }
+
   //===================================== AddUser Function
   Future<void> addUser(BuildContext context) async {
     final name = nameController.text.trim();
@@ -338,6 +322,7 @@ class _AddUserState extends State<AddUser> {
     final checkout = checkOutController.text.trim();
     final advanceAmount = advanceAmounntController.text.trim();
     final image = imgPath;
+    final image2 = imgPath2;
     print('$image');
     if (name.isEmpty ||
         phoneNumber.isEmpty ||
@@ -352,7 +337,7 @@ class _AddUserState extends State<AddUser> {
     final addUser = UserModel(
         name: name,
         phoneNumber: phoneNumber,
-        uploadAdhaar: uploadAdhaar,
+        uploadAdhaar: image2,
         occupation: occupation,
         checkin: checkin,
         checkout: checkout,
@@ -362,6 +347,6 @@ class _AddUserState extends State<AddUser> {
     await addUserAsync(addUser);
     print(' user $addUser');
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const User_List()));
+        MaterialPageRoute(builder: (context) => const UserList()));
   }
 }

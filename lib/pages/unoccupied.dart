@@ -28,116 +28,136 @@ class _UnoccupiedState extends State<Unoccupied> {
         return ListView.separated(
           itemBuilder: (context, index) {
             final data = roomList[index];
-            return Card(
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Image
-                    Container(
-                      height: 200,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: FileImage(File(data.image)),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Room details
-                        Text(
-                          'Room No: ${data.room}',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+            return Padding(
+              padding: const EdgeInsets.all(15),
+              child: Card(
+                elevation: 10,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Image
+                      Container(
+                        height: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: FileImage(File(data.image)),
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        Row(
+                      ),
+                      
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Floor: ${data.floor}',
-                              style: const TextStyle(
-                                fontSize: 15,
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Text(
-                              'Guests: ${data.guests}',
-                              style: const TextStyle(
-                                fontSize: 15,
-                              ),
-                            ),
-                            const SizedBox(width: 13),
-                            Text(
-                              'Bed: ${data.bed}',
-                              style: const TextStyle(
-                                fontSize: 15,
-                              ),
-                            ),
-                            const SizedBox(width: 60),
-                            Row(
-                              children: [
-                                IconButton(
-                                    onPressed: () {
-                                      if (data.id != null) {
-                                        deleteAlert(context, data.id!);
-                                      }
-                                    },
-                                    icon: const Icon(Icons.delete)),
-                                IconButton(
-                                  onPressed: () {
-                                    if (data.id != null) {
-                                      editAlert(
-                                          context, data.id!, roomList, index);
-                                    }
-                                  },
-                                  icon: const Icon(
-                                    Icons.edit,
-                                    size: 18,
-                                  ),
-                                  iconSize: 16,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '₹: ${data.rent}',
+                              'Room No: ${data.room}',
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 20,
                               ),
                             ),
-                            ElevatedButton.icon(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => AddUser(
-                                              tabController:
-                                                  widget.tabController,
-                                            )));
-                              },
-                              icon: const Icon(Icons.money_outlined),
-                              label: const Text('Rent'),
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(255, 15, 227, 22),
+                            SizedBox(height: 1,),
+                            Row(
+                              children: [
+                                Text(
+                                  'Floor: ${data.floor}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
                                 ),
-                              ),
-                            )
+                                const SizedBox(width: 10),
+                                Text(
+                                  'Guests: ${data.guests}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                const SizedBox(width: 13),
+                                Text(
+                                  'Bed: ${data.bed}',
+                                  style: const TextStyle(
+                                    // fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                const SizedBox(width: 20),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                        onPressed: () {
+                                          if (data.id != null) {
+                                            deleteAlert(context, data.id!);
+                                          }
+                                        },
+                                        icon: const Icon(Icons.delete,
+                                        color: Colors.red,)),
+                                    IconButton(
+                                      onPressed: () {
+                                        if (data.id != null) {
+                                          editAlert(
+                                              context, data.id!, roomList, index);
+                                        }
+                                      },
+                                      icon: const Icon(
+                                        Icons.edit,
+                                       
+                                        color: Color.fromARGB(255, 50, 62, 73),
+                                      ),
+                                      iconSize: 10,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '₹: ${data.rent}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                ElevatedButton.icon(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => AddUser(
+                                                  tabController:
+                                                      widget.tabController,
+                                                )));
+                                  },
+                                  icon: const Icon(Icons.currency_rupee),
+                                  label: const Text('Rent',
+                                     style: TextStyle(
+                                     color: Color.fromARGB(255, 3, 12, 83), 
+                                    ),
+                                  ),
+                                  
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                      Colors.green
+                                    ),
+                                  ),
+                                
+                                )
+                              ],
+                            ),
                           ],
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

@@ -175,17 +175,11 @@ class _AddRoomState extends State<AddRoom> {
                 button(
                     buttonText: 'save',
                     buttonPressed: () async {
-                      // final data = widget.roomModel;
-                      if (
-                          // data != null &&
-                          ischeckroomNo(roomNoController.text)) {
+                      if (ischeckroomNo(roomNoController.text)) {
                         CustomSnackBar(
                             context, 'Room Number Already Added', Colors.red);
                       } else {
-                        
-                        CustomSnackBar(context, 'Room Number Added SuccesFully',
-                            const Color.fromARGB(255, 13, 71, 161));
-                            addRoom(context);
+                        addRoom(context);
                       }
                     })
               ],
@@ -234,10 +228,16 @@ class _AddRoomState extends State<AddRoom> {
           bed: bed,
           rent: rent,
           image: image);
-     
+
       addRoomAsync(addRooms);
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Home()));
+      CustomSnackBar(context, 'Room Number Added SuccesFully',
+     const Color.fromARGB(255, 3, 12, 83));
+      Future.delayed(const Duration(seconds: 1), () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const Home()),
+        );
+      }
+      );
     }
   }
 }

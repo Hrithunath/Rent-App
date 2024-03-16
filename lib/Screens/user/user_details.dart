@@ -5,14 +5,22 @@ import 'package:rentapp/model/user_model.dart';
 import 'package:rentapp/widgets/refactor_edit.dart';
 import 'package:rentapp/widgets/refactor_text.dart';
 
-class UserDetails extends StatelessWidget {
+class UserDetails extends StatefulWidget {
   final UserModel userModel;
   final String? imagepath;
-  UserDetails({required this.userModel, this.imagepath});
+  const UserDetails({super.key, required this.userModel, this.imagepath});
+
+  @override
+  State<UserDetails> createState() => _UserDetailsState();
+}
+
+class _UserDetailsState extends State<UserDetails> {
+
+  
 
   @override
   Widget build(BuildContext context) {
-    int? id = userModel.id;
+    int? id = widget.userModel.id;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Full Details'),
@@ -28,7 +36,7 @@ class UserDetails extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Container(
+        child: SizedBox(
           width: 300,
           height: 550,
           child: Card(
@@ -43,31 +51,31 @@ class UserDetails extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: FileImage(File(userModel.image)),
+                    backgroundImage: FileImage(File(widget.userModel.image)),
                   ),
                   const SizedBox(height: 20),
-                  customText('Name', userModel.name, null),
+                  customText('Name', widget.userModel.name, null),
                   const SizedBox(height: 10),
-                  customText('Phone Number', userModel.phoneNumber, null),
+                  customText('Phone Number', widget.userModel.phoneNumber, null),
                   const SizedBox(height: 10),
                   customText(
                     'UploadAdhaar',
-                    userModel.uploadAdhaar,
+                  'Adhaar',
                     IconButton(
                       onPressed: () {
-                        showUploadAdhaar(context, userModel.uploadAdhaar);
+                        showUploadAdhaar(context, widget.userModel.uploadAdhaar);
                       },
                       icon: const Icon(Icons.image_outlined),
                     ),
                   ),
                   const SizedBox(height: 10),
-                  customText('Occupation', userModel.occupation, null),
+                  customText('Occupation', widget.userModel.occupation, null),
                   const SizedBox(height: 10),
-                  customText('CheckIn', userModel.checkin, null),
+                  customText('CheckIn', widget.userModel.checkin, null),
                   const SizedBox(height: 10),
-                  customText('CheckOut', userModel.checkout, null),
+                  customText('CheckOut', widget.userModel.checkout, null),
                   const SizedBox(height: 10),
-                  customText('Advance Amount', userModel.advanceAmount, null),
+                  customText('Advance Amount', widget.userModel.advanceAmount, null),
                 ],
               ),
             ),
@@ -82,12 +90,12 @@ class UserDetails extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('User Image'),
+          title: const Text('Adhaar Image'),
           content: SizedBox(
             width: 200,
             height: 200,
             child: Image.file(
-              File(imagePath),
+              File(widget.userModel.uploadAdhaar),
               fit: BoxFit.cover,
             ),
           ),
@@ -113,7 +121,7 @@ class UserDetails extends StatelessWidget {
             Navigator.of(context).pop();
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => EditUser(userModel: userModel),
+                builder: (context) => EditUser(userModel: widget.userModel),
               ),
             );
           },

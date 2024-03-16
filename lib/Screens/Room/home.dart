@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentapp/Screens/Room/add_room.dart';
-import 'package:rentapp/Screens/user/User_list.dart';
+import 'package:rentapp/Screens/user/user_list.dart';
 
 import 'package:rentapp/functions/db_room.dart';
 
@@ -36,9 +36,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           title: const Text('Home'),
           bottom: TabBar(
               controller: _tabController,
-              indicatorColor: Colors.white,
+              indicatorColor: Colors.grey,
               indicatorWeight: 5,
+              labelColor: Colors.white,
               tabs: const [
+                
                 Tab(text: 'Unoccupied '),
                 Tab(text: 'Occupied'),
                 Tab(text: 'paid'),
@@ -59,22 +61,45 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
         //===================================== BottomNavigationBar
         bottomNavigationBar: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.home)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.filter_alt_sharp)),
-              const SizedBox(
-                width: 60,
-              ),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.currency_rupee)),
-              IconButton(onPressed: () {    Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const User_List()));
-              }, icon: const Icon(Icons.people)),
-            ],
-          ),
+  shape: const CircularNotchedRectangle(),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      IconButton(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.home,
+         color: Color.fromARGB(255, 50, 62, 73), 
         ),
+      ),
+      IconButton(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.filter_alt_sharp,
+          color: Color.fromARGB(255, 50, 62, 73),
+        ),
+      ),
+      const SizedBox(width: 60),
+      IconButton(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.currency_rupee,
+           color: Color.fromARGB(255, 50, 62, 73), 
+        ),
+      ),
+      IconButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserList()));
+        },
+        icon: const Icon(
+          Icons.people,
+           color: Color.fromARGB(255, 50, 62, 73), 
+        ),
+      ),
+    ],
+  ),
+),
+
 
         //===================================== FloatingActionButton
         floatingActionButton: FloatingActionButton(

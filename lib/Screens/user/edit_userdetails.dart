@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:rentapp/Screens/user/user_details.dart';
+import 'package:rentapp/Screens/user/user_list.dart';
 import 'package:rentapp/functions/db_user.dart';
 import 'package:rentapp/model/user_model.dart';
 import 'package:rentapp/widgets/refactor_button.dart';
@@ -14,9 +15,9 @@ class EditUser extends StatefulWidget {
   final UserModel? userModel;
 
   const EditUser({
-    Key? key,
+    super.key,
     required this.userModel,
-  }) : super(key: key);
+  });
 
   @override
   State<EditUser> createState() => _EditUserState();
@@ -39,7 +40,7 @@ class _EditUserState extends State<EditUser> {
   final ImagePicker _imagePicker = ImagePicker();
   File? pickedImage;
   String imgPath = '';
-
+  String imgPath2 = '';
   @override
   void initState() {
     super.initState();
@@ -73,12 +74,10 @@ class _EditUserState extends State<EditUser> {
                     GestureDetector(
                       onTap: pickImage,
                       child: CircleAvatar(
-                        radius: 70,
-                        backgroundImage: pickedImage != null
-                            ? FileImage(pickedImage!)
-                            : const AssetImage("assets/images/profile.jpg")
-                            as ImageProvider
-                      ),
+                          radius: 70,
+                          backgroundImage: imgPath.isNotEmpty
+                              ? FileImage(File(imgPath))
+                              : FileImage(File(widget.userModel!.image))),
                     ),
                     customTextfeild(
                       controller: nameController,
@@ -108,32 +107,44 @@ class _EditUserState extends State<EditUser> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: TextFormField(
+                    // Padding(
+                    //   padding: const EdgeInsets.only(left: 20, right: 20),
+                    //   child: TextFormField(
+                    //     controller: uploadAdhaarController,
+                    //     keyboardType: TextInputType.number,
+                    //     decoration: InputDecoration(
+                    //       labelText: 'Upload Adhaar',
+                    //       border: OutlineInputBorder(
+                    //         borderRadius: BorderRadius.circular(15),
+                    //       ),
+                    //       suffixIcon: GestureDetector(
+                    //         onTap: () {
+                    //           UploadAdhaar();
+                    //         },
+                    //         child: Icon(Icons.upload_file),
+                    //       ),
+                    //     ),
+                    //     validator: (value) {
+                    //       if (value == null || value.isEmpty) {
+                    //         return 'Upload Adhaar is Required';
+                    //       }
+                    //       return null;
+                    //     },
+                    //     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    //   ),
+                    // ),
+                    customTextfeild(
                         controller: uploadAdhaarController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: 'Upload Adhaar',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              UploadAdhaar();
-                            },
-                            child: Icon(Icons.upload_file),
-                          ),
-                        ),
+                        keyboardTYpe: TextInputType.name,
+                        labelText: 'uploadAdhaar',
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Upload Adhaar is Required';
                           }
                           return null;
                         },
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                      ),
-                    ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction),
+
                     customTextfeild(
                       controller: occupationController,
                       keyboardTYpe: TextInputType.text,
@@ -146,6 +157,11 @@ class _EditUserState extends State<EditUser> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
+
+                    const SizedBox(
+                      height: 10,
+                    ),
+
                     Row(
                       children: [
                         Expanded(
@@ -180,7 +196,7 @@ class _EditUserState extends State<EditUser> {
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 suffixIcon: GestureDetector(
-                                  child: Icon(Icons.calendar_month),
+                                  child: const Icon(Icons.calendar_month),
                                 ),
                               ),
                             ),
@@ -188,6 +204,11 @@ class _EditUserState extends State<EditUser> {
                         ),
                       ],
                     ),
+
+                    const SizedBox(
+                      height: 10,
+                    ),
+
                     customTextfeild(
                       controller: advanceAmounntController,
                       keyboardTYpe: TextInputType.number,
@@ -211,7 +232,7 @@ class _EditUserState extends State<EditUser> {
                             }
                           },
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         button(
                           buttonText: 'Save',
                           buttonPressed: () {
@@ -277,13 +298,13 @@ class _EditUserState extends State<EditUser> {
     }
   }
 
-  Future<void> UploadAdhaar() async {
+  Future<void> uploadAdhaar() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         pickedImage = File(pickedFile.path);
-        imgPath = pickedFile.path;
+        imgPath2 = pickedFile.path;
       });
     }
   }
@@ -310,6 +331,7 @@ class _EditUserState extends State<EditUser> {
       }
 
       final editUser = UserModel(
+        id: widget.userModel!.id,
         name: name,
         phoneNumber: phoneNumber,
         uploadAdhaar: uploadAdhaar,
@@ -317,12 +339,13 @@ class _EditUserState extends State<EditUser> {
         checkin: checkin,
         checkout: checkout,
         advanceAmount: advanceAmount,
-        image: image,
+        image: imgPath.isEmpty ? widget.userModel!.image : imgPath,
       );
 
-      await updateUserAsync(editUser, id);
+      await updateUserAsync(editUser, widget.userModel!.id);
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => UserDetails(userModel: editUser)),
+        MaterialPageRoute(
+            builder: (context) => UserDetails(userModel: editUser)),
       );
     }
   }
@@ -332,9 +355,12 @@ class _EditUserState extends State<EditUser> {
       context: context,
       builder: (context) {
         return DeleteAlert(
-          onDelete: () {
-            deleteuser(id);
-            Navigator.of(context).pop();
+          onDelete: () async {
+            await deleteuser(id);
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) {
+              return const UserList();
+            }), (route) => false);
           },
         );
       },

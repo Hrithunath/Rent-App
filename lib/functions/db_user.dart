@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rentapp/model/user_model.dart';
@@ -14,9 +16,15 @@ Future<void> addUserAsync(UserModel value) async {
 }
 
 //=====================================UpdateRoom
-Future<void> updateUserAsync(editUser, id) async {
+Future<void> updateUserAsync(UserModel editUser, id) async {
   final userDB = await Hive.openBox<UserModel>('user_db');
-  await userDB.put(editUser.id, editUser);
+  log(id.toString());
+  try {
+    await userDB.put(id, editUser);
+  } catch (e) {
+    log('error');
+    log(e.toString());
+  }
   // roomNotifier.value.clear(); // Clear the list before updating
   // roomNotifier.value.addAll(roomDB.values);
   // roomNotifier.notifyListeners();
