@@ -19,7 +19,6 @@ class AddRoom extends StatefulWidget {
 }
 
 class _AddRoomState extends State<AddRoom> {
-
   final formkey = GlobalKey<FormState>();
   final roomNoController = TextEditingController();
   final floorController = TextEditingController();
@@ -49,7 +48,7 @@ class _AddRoomState extends State<AddRoom> {
                     borderRadius: BorderRadius.circular(15),
 
                     // ignore: unnecessary_null_comparison
-                        image: imgPath != null
+                    image: imgPath != null
                         ? DecorationImage(
                             image: FileImage(File(imgPath)),
                             fit: BoxFit.cover,
@@ -198,13 +197,12 @@ class _AddRoomState extends State<AddRoom> {
 
       addRoomAsync(addRooms);
       CustomSnackBar(context, 'Room Number Added SuccesFully',
-     const Color.fromARGB(255, 3, 12, 83));
+          const Color.fromARGB(255, 3, 12, 83));
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const Home()),
         );
-      }
-      );
+      });
     }
   }
 }

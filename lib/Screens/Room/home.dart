@@ -89,7 +89,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       IconButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserList()));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const User()));
         },
         icon: const Icon(
           Icons.people,
